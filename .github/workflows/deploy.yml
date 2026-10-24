@@ -1,4 +1,3 @@
-
 name: Deploy Astro to GitHub Pages
 
 on:
@@ -20,6 +19,8 @@ jobs:
 
       - name: Build Astro site
         uses: withastro/action@v5
+        with:
+          package-manager: pnpm@8.15.9
 
   deploy:
     needs: build
