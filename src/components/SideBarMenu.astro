@@ -1,5 +1,4 @@
 ---
-import { profile } from "../data/profile";
 const { sideBarActiveItemID } = Astro.props;
 const items = [
   { id: "home", label: "홈", href: "/" },
@@ -13,5 +12,4 @@ const items = [
 <ul class="menu grow shrink menu-md overflow-y-auto">
   {items.map((item) => <li><a class:list={["py-3 text-base", { "bg-base-300": sideBarActiveItemID === item.id }]}
     id={item.id} href={item.href} aria-current={sideBarActiveItemID === item.id ? "page" : undefined}>{item.label}</a></li>)}
-  <li><a class="py-3 text-base" href={`mailto:${profile.email}`}>연락하기</a></li>
 </ul>
