@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import SideBarFooter from "./SideBarFooter.astro";
 import { profile } from "../data/profile";
 import SideBarMenu from "./SideBarMenu.astro";
@@ -12,7 +13,7 @@ const { sideBarActiveItemID } = Astro.props;
       <a href="/" aria-label="이유찬 포트폴리오 홈">
         <div class="avatar transition ease-in-out hover:scale-[102%] block m-auto">
           <div class="w-[8.5rem] h-[8.5rem] mask mask-circle bg-base-300 flex items-center justify-center">
-            <span class="text-4xl font-bold" aria-hidden="true">YC</span>
+            <Image src={profile.photo} alt={`${profile.name} 프로필 사진`} width={100} height={140} class="w-full h-full object-cover" />
           </div>
         </div>
       </a>

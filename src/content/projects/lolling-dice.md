@@ -6,8 +6,17 @@ team: '13인 팀 · 기획 8명 / 프로그래밍 5명'
 role: '플레이어 입력·FSM·스킬·HUD·Scene 전환·튜토리얼'
 stack: ['Unity', 'C#', 'New Input System', 'Addressables', 'Shader Graph']
 order: 1
+heroImage: '/portfolio/lolling-dice.webp'
+imageWidth: 1024
+imageHeight: 420
 badge: '2주 개발 · 1주 QA'
+videos:
+  - type: 'youtube'
+    id: '4j5FVpfi5hc'
+    title: 'Lolling Dice 소개 영상'
 links:
+  - label: 'GitHub 저장소'
+    url: 'https://github.com/Kyungil-smart/08-firstcollabproject-Nahyunsusu'
   - label: '게임 플레이'
     url: 'https://devel-rocket.itch.io/smart04-lolling-dicemaster'
   - label: '소개 영상'

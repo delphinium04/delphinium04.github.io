@@ -40,8 +40,24 @@ const projectCollection = defineCollection({
         stack: z.array(z.string()),
         order: z.number(),
         heroImage: z.string().optional(),
+        imageWidth: z.number().int().positive().optional(),
+        imageHeight: z.number().int().positive().optional(),
         badge: z.string().optional(),
         links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
+        videos: z.array(z.discriminatedUnion('type', [
+            z.object({
+                type: z.literal('youtube'),
+                id: z.string().regex(/^[A-Za-z0-9_-]{11}$/),
+                title: z.string().min(1),
+                unavailableReason: z.string().min(1).optional(),
+            }),
+            z.object({
+                type: z.literal('file'),
+                src: z.string().min(1),
+                title: z.string().min(1),
+                poster: z.string().optional(),
+            }),
+        ])).default([]),
     }),
 });
 

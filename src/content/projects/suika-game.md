@@ -6,8 +6,13 @@ team: '대학 수업 팀 프로젝트'
 role: '조장 · 게임 루프·공 합성·모듈 데이터 연결'
 stack: ['Python', 'Pygame', 'Pymunk']
 order: 4
+heroImage: '/portfolio/suika.webp'
+imageWidth: 1024
+imageHeight: 1064
 badge: '알고리즘과게임콘텐츠 A+'
 links:
+  - label: 'GitHub 저장소'
+    url: 'https://github.com/delphinium04/suika-game-python'
   - label: 'Notion 상세 기록'
     url: 'https://app.notion.com/p/3dd20568b61a80f5830cfedf8c7bbe7b'
 ---
@@ -41,6 +46,8 @@ Pymunk의 `shapes_collide()`로 접점을 조회하고, 반환된 `points`가 �
 목록을 수정한 뒤 이전 인덱스로 계속 순회하지 않도록 합성 직후 `return`했습니다. 따라서 한 프레임에 최대 한 쌍이 합성되고, 나머지 후보는 다음 프레임에서 검사합니다.
 
 ## 결과와 구현의 한계
+
+![같은 크기의 공을 합쳐 점수를 얻는 수박 게임 플레이 시연](/portfolio/suika-gameplay.gif)
 
 모듈 사이의 데이터를 연결하고 오류를 수정해 **기한 내 플레이 가능한 게임을 제출**했으며, 해당 과목에서 <strong>A+</strong>를 받았습니다. 외부 라이브러리의 API와 사용 조건을 문서에서 확인하고, 사례를 게임의 구조와 요구사항에 맞게 적용하는 방법을 익혔습니다.
 

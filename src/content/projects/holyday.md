@@ -6,7 +6,15 @@ team: '4인 팀 프로젝트'
 role: '축복 시스템·UI·Scene 흐름·현지화·Git 관리'
 stack: ['Unity', 'C#', 'Photon Fusion', 'UniTask', 'Addressables', 'UGUI']
 order: 2
+heroImage: '/portfolio/holyday.webp'
+imageWidth: 460
+imageHeight: 215
 badge: 'PlayX4 2026 시연'
+videos:
+  - type: 'youtube'
+    id: 'ifIGcRytUuk'
+    title: 'HolyDay 소개 영상'
+    unavailableReason: '업로더의 YouTube 계정이 폐쇄되어 원본 영상을 재생할 수 없습니다.'
 links:
   - label: '소개 영상'
     url: 'https://youtu.be/ifIGcRytUuk'

@@ -1,6 +1,7 @@
 export const profile = {
   name: "이유찬",
   englishName: "Lee Yuchan",
+  photo: "/portfolio/profile.webp",
   role: "게임 클라이언트 개발자 · 신입",
   tagline: "기획 의도를 안정적으로 구현하고, 개별 기능을 하나의 플레이 경험으로 연결합니다.",
   description:

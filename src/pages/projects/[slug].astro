@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 }
 const { project } = Astro.props;
 const { Content } = await project.render();
-const { title, description, period, team, role, stack, heroImage, badge, links } = project.data;
+const { title, description, period, team, role, stack, heroImage, imageWidth, imageHeight, badge, links, videos } = project.data;
 ---
 
 <BaseLayout title={`${title} | 이유찬`} description={description} image={heroImage} sideBarActiveItemID="projects" ogType="article">
@@ -30,8 +30,41 @@ const { title, description, period, team, role, stack, heroImage, badge, links }
       {links.length > 0 && <div class="flex flex-wrap gap-3 mb-8">{links.map((link) => (
         <a class="btn btn-outline btn-sm" href={link.url} target="_blank" rel="noopener noreferrer">{link.label} ↗</a>
       ))}</div>}
-      {heroImage && <Image src={heroImage} alt={`${title} 게임 화면`} width={750} height={422} class="w-full rounded-lg mb-8" />}
+      {heroImage && <Image src={heroImage} alt={`${title} 게임 화면`} width={imageWidth ?? 750} height={imageHeight ?? 422} class="w-full h-auto object-contain rounded-lg mb-8" />}
     </header>
+    {videos.length > 0 && <section class="mb-8" aria-labelledby="project-videos-heading">
+      <h2 id="project-videos-heading" class="text-2xl font-bold mb-4">플레이 영상</h2>
+      <div class="grid gap-6">
+        {videos.map((video) => <figure>
+          {video.type === "youtube" ? (
+            video.unavailableReason ? (
+              <div class="rounded-lg bg-base-200 p-4">
+                <p>{video.unavailableReason}</p>
+                <a class="link link-hover mt-3 inline-block" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">원본 YouTube 링크 ↗</a>
+              </div>
+            ) : (
+              <div class="relative aspect-video overflow-hidden rounded-lg bg-base-200">
+                <iframe
+                  class="absolute inset-0 h-full w-full border-0"
+                  src={`https://www.youtube-nocookie.com/embed/${video.id}`}
+                  title={video.title}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            )
+          ) : (
+            <video class="w-full rounded-lg bg-base-200" controls preload="metadata" poster={video.poster} aria-label={video.title}>
+              <source src={video.src} type="video/mp4" />
+              <p>영상을 재생할 수 없는 경우 <a class="link" href={video.src}>영상 파일을 열어주세요.</a></p>
+            </video>
+          )}
+          <figcaption class="mt-2 text-sm opacity-70">{video.title}</figcaption>
+        </figure>)}
+      </div>
+    </section>}
     <div class="prose prose-lg max-w-none prose-headings:scroll-mt-20 prose-pre:max-w-full prose-pre:overflow-x-auto">
       <Content />
     </div>

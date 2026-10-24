@@ -6,7 +6,15 @@ team: '대학 수업 팀 프로젝트'
 role: '공유 메모리·화면 갱신 실행 흐름 제안 및 구현 지원'
 stack: ['C', 'Linux', 'SDL2', 'System V 공유 메모리', 'POSIX 시그널']
 order: 5
+heroImage: '/portfolio/shared-memory-game.webp'
+imageWidth: 1024
+imageHeight: 608
 badge: '게임서버프로그래밍입문 A+'
+videos:
+  - type: 'file'
+    src: '/portfolio/shared-memory-gameplay.mp4'
+    poster: '/portfolio/shared-memory-game.webp'
+    title: '2인 사다리 게임 플레이 영상'
 links:
   - label: 'GitHub 저장소'
     url: 'https://github.com/delphinium04/shared-memory-game'

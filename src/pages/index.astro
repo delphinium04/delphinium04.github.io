@@ -33,6 +33,7 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
   {projects.slice(0, 3).map((project) => (
     <>
       <HorizontalCard title={project.data.title} img={project.data.heroImage} icon={projectIcons[project.slug]}
+        imageWidth={project.data.imageWidth} imageHeight={project.data.imageHeight}
         desc={project.data.description} url={`/projects/${project.slug}/`} target="_self" badge={project.data.badge} />
       <div class="divider my-0"></div>
     </>

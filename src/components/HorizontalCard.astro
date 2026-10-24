@@ -1,5 +1,5 @@
 ---
-const { title, img, icon, desc, url, badge, tags, target = "_blank" } = Astro.props;
+const { title, img, imageWidth = 750, imageHeight = 422, icon, desc, url, badge, tags, target = "_blank" } = Astro.props;
 import { Image } from "astro:assets";
 const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
 ---
@@ -13,11 +13,11 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
         img && (
           <Image
             src={img}
-            width={750}
-            height={422}
+            width={imageWidth}
+            height={imageHeight}
             format="webp"
             alt={title}
-            class="max-w-full md:max-w-[13rem] rounded-lg"
+            class="max-w-full md:max-w-[13rem] h-auto object-contain rounded-lg"
           />
         )
       }
