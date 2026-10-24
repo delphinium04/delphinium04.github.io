@@ -4,14 +4,16 @@ import HorizontalShopItem from "../../components/HorizontalShopItem.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths({ paginate }) {
-  const items = await getCollection("store");
+  const items = (await getCollection("store")) ?? [];
   items.sort((a, b) => b.data.updatedDate.valueOf() - a.data.updatedDate.valueOf());
   return paginate(items, { pageSize: 10 });
 }
 const { page } = Astro.props;
 ---
 
-<BaseLayout title="Store" sideBarActiveItemID="store">
+<BaseLayout title="자료실 | 이유찬" sideBarActiveItemID="store">
+  <h1 class="text-3xl font-bold mb-5">자료실</h1>
+  {page.data.length === 0 && <p class="bg-base-200 p-4">공개된 자료가 없습니다. 프로젝트의 플레이 링크와 소개 영상은 <a class="link" href="/projects/">프로젝트 상세</a>에서 확인할 수 있습니다.</p>}
   <ul>
     {
       page.data.map((item) => (

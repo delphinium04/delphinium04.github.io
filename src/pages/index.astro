@@ -2,77 +2,79 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
-import createSlug from "../lib/createSlug"
+import { profile, strengths } from "../data/profile";
+import { projectIcons } from "../data/project-icons";
+import createSlug from "../lib/createSlug";
 
-const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const last_posts = posts.slice(0, 3);
+const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 ---
 
 <BaseLayout sideBarActiveItemID="home">
   <div class="pb-12 mt-5">
-    <div class="text-xl py-1">Hey there 👋</div>
-    <div class="text-5xl font-bold">I'm Manuel Ernesto</div>
-    <div class="text-3xl py-3 font-bold">Software Engineer and Entrepreneur</div>
-    <div class="py-2">
-      <text class="text-lg">
-        This is <b>Astrofy</b> a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS.
-        Create in minutes a website with Blog, CV, Project Section, Store and RSS Feed. I hope you find
-        it useful!
-      </text>
+    <div class="text-xl py-1">안녕하세요 👋</div>
+    <h1 class="text-5xl font-bold leading-tight">게임 개발자 이유찬입니다.</h1>
+    <div class="text-3xl py-3 font-bold">{profile.role}</div>
+    <div class="py-2 text-lg leading-relaxed">
+      <p class="font-semibold">{profile.tagline}</p>
+      <p class="mt-3">{profile.description}</p>
     </div>
-    <div class="mt-8">
-      <a class="btn" href="https://twitter.com/manuelernestog" target="_blank"> Let's connect!</a>
-      <a href="https://github.com/manuelernestog/astrofy" target="_blank" class="btn btn-outline ml-5">
-        Get This template
-      </a>
+    <p class="py-2 font-semibold">Unity · C# · C++</p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a class="btn" href="/projects/">프로젝트 보기</a>
+      <a class="btn btn-outline" href={`mailto:${profile.email}`}>연락하기</a>
     </div>
   </div>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
+  <div class="flex flex-wrap items-baseline justify-between gap-3 mb-2">
+    <h2 class="text-3xl font-bold">주요 프로젝트 {"</>"}</h2>
+    <a class="link link-hover text-sm" href="/projects/">전체 프로젝트 →</a>
   </div>
+  {projects.slice(0, 3).map((project) => (
+    <>
+      <HorizontalCard title={project.data.title} img={project.data.heroImage} icon={projectIcons[project.slug]}
+        desc={project.data.description} url={`/projects/${project.slug}/`} target="_self" badge={project.data.badge} />
+      <div class="divider my-0"></div>
+    </>
+  ))}
 
-  <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
-  />
+  <section class="mt-10" aria-labelledby="strengths-heading">
+    <h2 id="strengths-heading" class="text-3xl font-bold mb-5">개발에서 집중하는 것</h2>
+    <div class="grid gap-5 md:grid-cols-2">
+      {strengths.slice(0, 4).map((strength) => (
+        <div>
+          <h3 class="font-bold text-lg">{strength.title}</h3>
+          <p class="py-2 leading-relaxed">{strength.description}</p>
+        </div>
+      ))}
+    </div>
+    <a class="link link-hover text-sm" href="/services/">역량과 기술 자세히 보기 →</a>
+  </section>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
-  </div>
-
-  {
-    last_posts.map((post) => (
+  <section class="mt-10" aria-labelledby="blog-heading">
+    <h2 id="blog-heading" class="text-3xl font-bold mb-5">최근 기술 기록</h2>
+    {posts.length > 0 ? posts.map((post) => (
       <>
-        <HorizontalCard
-          title={post.data.title}
-          img={post.data.heroImage}
-          desc={post.data.description}
-          url={"/blog/" + createSlug(post.data.title, post.slug)}
-          target="_self"
-          badge={post.data.badge}
-        />
-        <div class="divider my-0" />
+        <HorizontalCard title={post.data.title} img={post.data.heroImage} desc={post.data.description}
+          url={`/blog/${createSlug(post.data.title, post.slug)}/`} target="_self" badge={post.data.badge} />
+        <div class="divider my-0"></div>
       </>
-    ))
-  }
+    )) : (
+      <div class="bg-base-200 border-l-4 border-secondary p-4">
+        <p>기술 기록을 준비하고 있습니다. 프로젝트별 구현 과정과 회고는 프로젝트 상세에서 읽을 수 있습니다.</p>
+        <a class="link link-hover inline-block mt-2" href="/projects/">프로젝트 구현 과정 읽기 →</a>
+      </div>
+    )}
+  </section>
+
+  <section class="mt-10" id="contact" aria-labelledby="contact-heading">
+    <h2 id="contact-heading" class="text-3xl font-bold mb-5">연락</h2>
+    <p>{profile.location}</p>
+    <a class="link link-hover inline-block mt-2 break-all" href={`mailto:${profile.email}`}>{profile.email}</a>
+    <div class="flex flex-wrap gap-5 mt-4">
+      <a class="link link-hover" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      <a class="link link-hover" href={profile.solvedAc} target="_blank" rel="noopener noreferrer">solved.ac ↗</a>
+      <a class="link link-hover" href={profile.leetcode} target="_blank" rel="noopener noreferrer">LeetCode ↗</a>
+    </div>
+  </section>
 </BaseLayout>

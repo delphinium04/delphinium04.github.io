@@ -1,8 +1,8 @@
 // 사이트 기본 정보
-export const SITE_TITLE = "이유찬 | 개발자 포트폴리오";
+export const SITE_TITLE = "이유찬 | 게임 클라이언트 개발자";
 
 export const SITE_DESCRIPTION =
-  "이유찬의 개발 프로젝트, 기술 기록과 이력서를 소개하는 포트폴리오입니다.";
+  "Unity와 C#으로 개별 기능을 하나의 플레이 경험으로 연결하는 게임 클라이언트 개발자 이유찬의 프로젝트, 역량과 이력을 소개합니다.";
 
 // 기존 기능 설정 유지
 export const GENERATE_SLUG_FROM_TITLE = true;

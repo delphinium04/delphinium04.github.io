@@ -1,51 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
+import { getCollection } from "astro:content";
+import { projectIcons } from "../data/project-icons";
+
+const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
+const groups = [
+  { title: "Unity 프로젝트", projects: projects.filter((project) => project.data.stack.includes("Unity")) },
+  { title: "기본기를 쌓은 프로젝트", projects: projects.filter((project) => !project.data.stack.includes("Unity")) },
+];
 ---
 
-<BaseLayout title = "Projects" sideBarActiveItemID="projects">
-  <div>
-    <div class="text-3xl w-full font-bold mb-5">Projects Header</div>
-  </div>
-
-  <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Projects Header</div>
-  </div>
-
-  <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 4"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 5"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
+<BaseLayout title="프로젝트 | 이유찬" sideBarActiveItemID="projects">
+  <h1 class="text-3xl font-bold mb-5">프로젝트</h1>
+  <p class="mb-8 leading-relaxed">플레이어의 입력과 상태부터 공통 시스템, UI와 실행 흐름까지.<br />팀 안에서 직접 구현하고 문제를 해결한 경험을 소개합니다.</p>
+  {groups.map((group) => (
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold mb-5">{group.title}</h2>
+      {group.projects.map((project) => (
+        <>
+          <HorizontalCard title={project.data.title} img={project.data.heroImage} icon={projectIcons[project.slug]}
+            desc={`${project.data.period} · ${project.data.description}`} url={`/projects/${project.slug}/`}
+            target="_self" badge={project.data.badge} />
+          <div class="divider my-0"></div>
+        </>
+      ))}
+    </section>
+  ))}
 </BaseLayout>

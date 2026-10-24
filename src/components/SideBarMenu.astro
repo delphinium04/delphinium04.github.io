@@ -1,26 +1,17 @@
 ---
+import { profile } from "../data/profile";
 const { sideBarActiveItemID } = Astro.props;
-const activeClass = "bg-base-300"; // For primary color replace with `active` class
+const items = [
+  { id: "home", label: "홈", href: "/" },
+  { id: "projects", label: "프로젝트", href: "/projects/" },
+  { id: "services", label: "역량과 기술", href: "/services/" },
+  { id: "blog", label: "기술 기록", href: "/blog/" },
+  { id: "cv", label: "이력", href: "/cv/" },
+];
 ---
 
 <ul class="menu grow shrink menu-md overflow-y-auto">
-    <li><a class="py-3 text-base" id="home" href="/">Home</a></li>
-    <li><a class="py-3 text-base" id="projects" href="/projects">Projects</a></li>
-    <li><a class="py-3 text-base" id="services" href="/services">Services</a></li>
-    <li><a class="py-3 text-base" id="store" href="/store">Store</a></li>
-    <li><a class="py-3 text-base" id="blog" href="/blog/">Blog</a></li>
-    <li><a class="py-3 text-base" id="cv" href="/cv">CV</a></li>
-    <li>
-        <a
-            class="py-3 text-base"
-            href="mailto:contact.manuelernestog@gmail.com"
-            target="_blank"
-            referrerpolicy="no-referrer-when-downgrade">Contact</a
-        >
-    </li>
+  {items.map((item) => <li><a class:list={["py-3 text-base", { "bg-base-300": sideBarActiveItemID === item.id }]}
+    id={item.id} href={item.href} aria-current={sideBarActiveItemID === item.id ? "page" : undefined}>{item.label}</a></li>)}
+  <li><a class="py-3 text-base" href={`mailto:${profile.email}`}>연락하기</a></li>
 </ul>
-
-<script define:vars={{ sideBarActiveItemID: sideBarActiveItemID, activeClass: activeClass }}>
-const activeItemElem = document.getElementById(sideBarActiveItemID);
-activeItemElem && activeItemElem.classList.add(activeClass);
-</script>

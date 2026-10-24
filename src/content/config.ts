@@ -29,8 +29,24 @@ export type StoreSchema = z.infer<typeof storeSchema>;
 
 const blogCollection = defineCollection({ schema: blogSchema });
 const storeCollection = defineCollection({ schema: storeSchema });
+const projectCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        period: z.string(),
+        team: z.string(),
+        role: z.string(),
+        stack: z.array(z.string()),
+        order: z.number(),
+        heroImage: z.string().optional(),
+        badge: z.string().optional(),
+        links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
+    }),
+});
 
 export const collections = {
     'blog': blogCollection,
-    'store': storeCollection
+    'store': storeCollection,
+    'projects': projectCollection,
 }
