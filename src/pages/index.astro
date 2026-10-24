@@ -12,22 +12,22 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
 ---
 
 <BaseLayout sideBarActiveItemID="home">
-  <div class="pb-12 mt-5">
-    <div class="text-xl py-1">안녕하세요 👋</div>
-    <h1 class="text-5xl font-bold leading-tight">게임 개발자 이유찬입니다.</h1>
-    <div class="text-3xl py-3 font-bold">{profile.role}</div>
-    <div class="py-2 text-lg leading-relaxed">
+  <div class="pb-14 mt-5">
+    <div class="text-xl mb-2">안녕하세요 👋</div>
+    <h1 class="text-4xl md:text-5xl font-bold leading-tight">이유찬입니다.</h1>
+    <div class="text-2xl mt-3 font-semibold text-base-content/80">{profile.role}</div>
+    <div class="mt-6 space-y-4 text-lg leading-relaxed">
       <p class="font-semibold">{profile.tagline}</p>
-      <p class="mt-3">{profile.description}</p>
+      <p class="text-base-content/85">{profile.description}</p>
     </div>
-    <p class="py-2 font-semibold">Unity · C# · C++</p>
+    <p class="mt-6 font-semibold tracking-wide">Unity · C# · C++</p>
     <div class="mt-8 flex flex-wrap gap-4">
       <a class="btn" href="/projects/">프로젝트 보기</a>
       <a class="btn btn-outline" href={`mailto:${profile.email}`}>연락하기</a>
     </div>
   </div>
 
-  <div class="flex flex-wrap items-baseline justify-between gap-3 mb-2">
+  <div class="flex flex-wrap items-baseline justify-between gap-3 mb-4">
     <h2 class="text-3xl font-bold">주요 프로젝트 {"</>"}</h2>
     <a class="link link-hover text-sm" href="/projects/">전체 프로젝트 →</a>
   </div>
@@ -36,42 +36,42 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
       <HorizontalCard title={project.data.title} img={project.data.heroImage} icon={projectIcons[project.slug]}
         imageWidth={project.data.imageWidth} imageHeight={project.data.imageHeight}
         desc={project.data.description} url={`/projects/${project.slug}/`} target="_self" badge={project.data.badge} />
-      <div class="divider my-0"></div>
+      <div class="divider my-1"></div>
     </>
   ))}
 
-  <section class="mt-10" aria-labelledby="strengths-heading">
-    <h2 id="strengths-heading" class="text-3xl font-bold mb-5">개발에서 집중하는 것</h2>
-    <div class="grid gap-5 md:grid-cols-2">
+  <section class="mt-14" aria-labelledby="strengths-heading">
+    <h2 id="strengths-heading" class="text-3xl font-bold mb-6">개발에서 집중하는 것</h2>
+    <div class="grid gap-7 md:grid-cols-2">
       {strengths.slice(0, 4).map((strength) => (
         <div>
-          <h3 class="font-bold text-lg">{strength.title}</h3>
-          <p class="py-2 leading-relaxed">{strength.description}</p>
+          <h3 class="font-bold text-lg leading-snug">{strength.title}</h3>
+          <p class="mt-2.5 leading-relaxed text-base-content/85">{strength.description}</p>
         </div>
       ))}
     </div>
-    <a class="link link-hover text-sm" href="/services/">역량과 기술 자세히 보기 →</a>
+    <a class="link link-hover text-sm inline-block mt-6" href="/services/">역량과 기술 자세히 보기 →</a>
   </section>
 
-  <section class="mt-10" aria-labelledby="blog-heading">
-    <h2 id="blog-heading" class="text-3xl font-bold mb-5">최근 기술 기록</h2>
+  <section class="mt-14" aria-labelledby="blog-heading">
+    <h2 id="blog-heading" class="text-3xl font-bold mb-6">최근 기술 기록</h2>
     {posts.length > 0 ? posts.map((post) => (
       <>
         <HorizontalCard title={post.data.title} img={post.data.heroImage} desc={post.data.description}
           url={`/blog/${createSlug(post.data.title, post.slug)}/`} target="_self" badge={post.data.badge} />
-        <div class="divider my-0"></div>
+        <div class="divider my-1"></div>
       </>
     )) : (
-      <div class="bg-base-200 border-l-4 border-secondary p-4">
-        <p>기술 기록을 준비하고 있습니다. 프로젝트별 구현 과정과 회고는 프로젝트 상세에서 읽을 수 있습니다.</p>
-        <a class="link link-hover inline-block mt-2" href="/projects/">프로젝트 구현 과정 읽기 →</a>
+      <div class="bg-base-200 border-l-4 border-secondary p-5 leading-relaxed">
+        <p>기술 기록을 준비하고 있습니다. 각 작품의 설계 배경과 문제 해결 과정은 프로젝트 상세 페이지에 정리되어 있습니다.</p>
+        <a class="link link-hover inline-block mt-3" href="/projects/">상세 기록 보러 가기 →</a>
       </div>
     )}
   </section>
 
-  <section class="mt-10" id="contact" aria-labelledby="contact-heading">
+  <section class="mt-14" id="contact" aria-labelledby="contact-heading">
     <h2 id="contact-heading" class="text-3xl font-bold mb-5">연락</h2>
-    <p class="mb-4 opacity-70">{profile.location}</p>
+    <p class="mb-5 opacity-70">{profile.location}</p>
     <ProfileLinks includeEmail />
   </section>
 </BaseLayout>

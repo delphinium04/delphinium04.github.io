@@ -2,7 +2,12 @@
 module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
-		extend: {},
+		extend: {
+			lineHeight: {
+				relaxed: '1.85',
+				loose: '2.0',
+			},
+		},
 	},
 	plugins: [require("@tailwindcss/typography"),require("daisyui")],
 	daisyui: {

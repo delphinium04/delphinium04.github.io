@@ -20,11 +20,11 @@ const { title, description, period, team, role, stack, heroImage, imageWidth, im
         <h1 class="text-4xl font-bold leading-tight"><span aria-hidden="true">{projectIcons[project.slug]} </span>{title}</h1>
         {badge && <span class="badge badge-secondary">{badge}</span>}
       </div>
-      <p class="text-lg leading-relaxed mt-4">{description}</p>
-      <dl class="grid gap-4 sm:grid-cols-2 bg-base-200 rounded-lg p-5 my-6">
-        <div><dt class="text-sm opacity-70">개발 기간</dt><dd class="mt-1">{period}</dd></div>
-        <div><dt class="text-sm opacity-70">팀 구성</dt><dd class="mt-1">{team}</dd></div>
-        <div class="sm:col-span-2"><dt class="text-sm opacity-70">담당 역할</dt><dd class="mt-1">{role}</dd></div>
+      <p class="text-lg leading-relaxed mt-5 text-base-content/90">{description}</p>
+      <dl class="grid gap-5 sm:grid-cols-2 bg-base-200 rounded-lg p-6 my-7">
+        <div><dt class="text-sm opacity-70">개발 기간</dt><dd class="mt-1.5 leading-relaxed">{period}</dd></div>
+        <div><dt class="text-sm opacity-70">팀 구성</dt><dd class="mt-1.5 leading-relaxed">{team}</dd></div>
+        <div class="sm:col-span-2"><dt class="text-sm opacity-70">담당 역할</dt><dd class="mt-1.5 leading-relaxed">{role}</dd></div>
       </dl>
       <div class="flex flex-wrap gap-2 mb-6">{stack.map((tech) => <span class="badge badge-outline">{tech}</span>)}</div>
       {links.length > 0 && <div class="flex flex-wrap gap-3 mb-8">{links.map((link) => (
@@ -32,13 +32,13 @@ const { title, description, period, team, role, stack, heroImage, imageWidth, im
       ))}</div>}
       {heroImage && <Image src={heroImage} alt={`${title} 게임 화면`} width={imageWidth ?? 750} height={imageHeight ?? 422} class="w-full h-auto object-contain rounded-lg mb-8" />}
     </header>
-    {videos.length > 0 && <section class="mb-8" aria-labelledby="project-videos-heading">
+    {videos.length > 0 && <section class="mb-10" aria-labelledby="project-videos-heading">
       <h2 id="project-videos-heading" class="text-2xl font-bold mb-4">플레이 영상</h2>
       <div class="grid gap-6">
         {videos.map((video) => <figure>
           {video.type === "youtube" ? (
             video.unavailableReason ? (
-              <div class="rounded-lg bg-base-200 p-4">
+              <div class="rounded-lg bg-base-200 p-5 leading-relaxed">
                 <p>{video.unavailableReason}</p>
                 <a class="link link-hover mt-3 inline-block" href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">원본 YouTube 링크 ↗</a>
               </div>
@@ -61,14 +61,14 @@ const { title, description, period, team, role, stack, heroImage, imageWidth, im
               <p>영상을 재생할 수 없는 경우 <a class="link" href={video.src}>영상 파일을 열어주세요.</a></p>
             </video>
           )}
-          <figcaption class="mt-2 text-sm opacity-70">{video.title}</figcaption>
+          <figcaption class="mt-2.5 text-sm opacity-70">{video.title}</figcaption>
         </figure>)}
       </div>
     </section>}
     <div class="prose prose-lg max-w-none prose-headings:scroll-mt-20 prose-pre:max-w-full prose-pre:overflow-x-auto">
       <Content />
     </div>
-    <div class="divider mt-10"></div>
+    <div class="divider mt-12"></div>
     <a class="btn btn-outline" href="/projects/">다른 프로젝트 보기</a>
   </article>
 </BaseLayout>

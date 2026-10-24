@@ -14,16 +14,16 @@ const { page } = Astro.props;
 ---
 
 <BaseLayout title="기술 기록 | 이유찬" sideBarActiveItemID="blog">
-  <div class="mb-5">
+  <div class="mb-6">
     <h1 class="text-3xl w-full font-bold">기술 기록</h1>
   </div>
 
   {
     page.data.length === 0 ? (
-      <div class="bg-base-200 border-l-4 border-secondary w-full p-4 min-w-full">
+      <div class="bg-base-200 border-l-4 border-secondary w-full p-5 min-w-full leading-relaxed">
         <p class="font-bold">기술 기록을 준비하고 있습니다.</p>
-        <p class="mt-2">프로젝트별 구현 과정과 회고는 프로젝트 상세에서 먼저 확인할 수 있습니다.</p>
-        <a class="link link-hover inline-block mt-3" href="/projects/">프로젝트 읽기 →</a>
+        <p class="mt-2.5">각 작품의 설계 배경과 문제 해결 과정은 프로젝트 상세 페이지에서 먼저 읽어보실 수 있습니다.</p>
+        <a class="link link-hover inline-block mt-3.5" href="/projects/">상세 기록 보러 가기 →</a>
       </div>
     ) : (
       <ul>
@@ -38,7 +38,7 @@ const { page } = Astro.props;
               badge={post.data.badge}
               tags={post.data.tags}
             />
-            <div class="divider my-0" />
+            <div class="divider my-1" />
           </>
         ))}
       </ul>
