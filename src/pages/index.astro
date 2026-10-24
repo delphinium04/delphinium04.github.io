@@ -30,7 +30,7 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
     <h2 class="text-3xl font-bold">주요 프로젝트 {"</>"}</h2>
     <a class="link link-hover text-sm" href="/projects/">전체 프로젝트 →</a>
   </div>
-  {projects.slice(0, 3).map((project) => (
+  {projects.map((project) => (
     <>
       <HorizontalCard title={project.data.title} img={project.data.heroImage} icon={projectIcons[project.slug]}
         imageWidth={project.data.imageWidth} imageHeight={project.data.imageHeight}

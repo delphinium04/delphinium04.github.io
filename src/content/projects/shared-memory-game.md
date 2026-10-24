@@ -1,5 +1,5 @@
 ---
-title: '2인 사다리 게임'
+title: '뱀과 사다리 (Linux)'
 description: '공유 메모리 갱신과 SDL2 화면 출력을 연결하는 실행 구조를 제안해 팀원의 구현을 지원했고, 해당 과목에서 A+를 받았습니다.'
 period: '2024년 2학기'
 team: '대학 수업 팀 프로젝트'
@@ -14,7 +14,7 @@ videos:
   - type: 'file'
     src: '/portfolio/shared-memory-gameplay.mp4'
     poster: '/portfolio/shared-memory-game.webp'
-    title: '2인 사다리 게임 플레이 영상'
+    title: '뱀과 사다리 (Linux) 플레이 영상'
 links:
   - label: 'GitHub 저장소'
     url: 'https://github.com/delphinium04/shared-memory-game'
