@@ -24,12 +24,13 @@ const {
     {TRANSITION_API && <ViewTransitions />}
   </head>
   <body>
-    <div class:list={["bg-base-100 drawer", { "lg:drawer-open": includeSidebar }]}>
+    <div class="bg-base-100 drawer">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content bg-base-100">
         <Header title={SITE_TITLE} />
-        <div class="md:flex md:justify-center">
-          <main class="p-6 pt-10 w-full lg:max-w-[900px] max-w-[100vw] min-w-0">
+        <slot name="cover" />
+        <div class="flex justify-center">
+          <main class="px-6 py-10 md:py-16 w-full max-w-[720px] min-w-0">
             <slot />
           </main>
         </div>

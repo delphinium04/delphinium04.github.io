@@ -8,7 +8,7 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
   class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%]"
 >
   <a href={url} target={target} rel={target === "_blank" ? "noopener noreferrer" : undefined}>
-    <div class="hero-content flex-col md:flex-row">
+    <div class="hero-content flex-col md:flex-row py-6 px-4 gap-6">
       {
         img && (
           <Image
@@ -22,12 +22,12 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
         )
       }
       {!img && icon && <div class="w-full md:w-[13rem] shrink-0 aspect-video rounded-lg bg-base-200 flex items-center justify-center text-5xl" aria-hidden="true">{icon}</div>}
-      <div class="grow w-full">
+      <div class="grow w-full space-y-2">
         <h3 class="text-xl font-bold">
           {title}
           {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
         </h3>
-        <p class="py-1 text-1xl">{desc}</p>
+        <p class="py-1 text-base leading-relaxed text-base-content/80">{desc}</p>
       </div>
     </div>
   </a>
