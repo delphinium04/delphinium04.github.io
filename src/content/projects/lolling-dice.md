@@ -4,7 +4,7 @@ description: '주사위 눈금에 따라 달라지는 12종의 스킬과 플레�
 period: '2026.04.01 ~ 2026.04.20 (2주 개발 · 1주 QA)'
 team: '13인 팀 프로젝트 (기획 8명 · 프로그래밍 5명)'
 role: '프로그래밍 / 캐릭터 전반 구현 (플레이어 입력·FSM·스킬·HUD·Scene 전환·튜토리얼)'
-stack: ['Unity', 'C#', 'New Input System', 'Addressables', 'Shader Graph']
+stack: ['Unity', 'C#', 'New Input System']
 order: 1
 heroImage: '/portfolio/lolling-dice.webp'
 imageWidth: 1024
@@ -370,7 +370,6 @@ AssetDatabase.SaveAssets();
 - **싱글톤 기반 데이터 영속성**: 플레이어 데이터를 전담 관리하는 매니저를 두어 Scene 전환 시에도 스탯, 스킬, 장비 정보를 보존하고, 새 Scene 로드 완료 시 플레이어 객체가 이를 복원하도록 구성
 - **기본 스탯과 런타임 스탯 분리**: 캐릭터의 원본 기본 스탯과 레벨업·장비 장착으로 변동되는 보정값을 분리하여, 장비 교체 시 스탯이 중복 가산되거나 오차가 발생하지 않도록 재계산 로직 작성
 - **이벤트 기반(Event-Driven) HUD 갱신**: 체력 변동, 경험치·골드 획득, 스킬 사용 및 주사위 재장전 시점에만 C# 이벤트를 발행하여 HUD가 갱신되도록 결합도 감소
-- **화면 전환 연출 및 튜토리얼**: Shader Graph 기반의 화면 전환 애니메이션을 제작하고, 비동기 Scene 로드·BGM 페이드·컷신·단계별 조작 튜토리얼을 연결
 
 ---
 

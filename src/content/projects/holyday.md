@@ -4,7 +4,7 @@ description: '데이터와 효과를 분리한 11종의 축복과 스택형 팝�
 period: '2026.01 ~ 진행 중 (2026.05 PlayX4 전시 · Steam 출시 준비)'
 team: '4인 팀 프로젝트'
 role: '프로그래밍(UI / Scene) 및 Git 관리 (축복 시스템·팝업 관리·UI·초기화 및 매니저 구조)'
-stack: ['Unity', 'C#', 'Photon Fusion', 'UniTask', 'Addressables', 'UGUI']
+stack: ['Unity', 'C#', 'Photon Fusion', 'UniTask', 'UGUI']
 order: 2
 heroImage: '/portfolio/holyday.webp'
 imageWidth: 460
