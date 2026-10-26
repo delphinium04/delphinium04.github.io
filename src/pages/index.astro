@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
+import ProfileLinks from "../components/ProfileLinks.astro";
 import { getCollection } from "astro:content";
 import { profile, strengths } from "../data/profile";
 import { projectIcons } from "../data/project-icons";
@@ -46,7 +47,7 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
       <!-- 3. 소개 본문 텍스트 영역 -->
       <div class="space-y-4 text-lg leading-relaxed pt-2">
         <p class="font-semibold">{profile.tagline}</p>
-        <p class="text-base-content/80">{profile.description}</p>
+        <p class="text-base-content/85">{profile.description}</p>
         <p class="pt-3 font-semibold tracking-wide text-base-content/90">
           Unity · C# · C++
         </p>
@@ -85,8 +86,8 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
       <div class="grid gap-8 md:grid-cols-2">
         {strengths.slice(0, 4).map((strength) => (
           <div class="space-y-2">
-            <h3 class="font-bold text-lg">{strength.title}</h3>
-            <p class="leading-relaxed text-base-content/80">{strength.description}</p>
+            <h3 class="font-bold text-lg leading-snug">{strength.title}</h3>
+            <p class="leading-relaxed text-base-content/85">{strength.description}</p>
           </div>
         ))}
       </div>
@@ -115,9 +116,9 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
           ))}
         </div>
       ) : (
-        <div class="bg-base-200 border-l-4 border-secondary p-6 rounded-r-lg space-y-3">
-          <p class="leading-relaxed">기술 기록을 준비하고 있습니다. 프로젝트별 구현 과정과 회고는 프로젝트 상세에서 읽을 수 있습니다.</p>
-          <a class="link link-hover inline-block" href="/projects/">프로젝트 구현 과정 읽기 →</a>
+        <div class="bg-base-200 border-l-4 border-secondary p-6 rounded-r-lg space-y-3 leading-relaxed">
+          <p>기술 기록을 준비하고 있습니다. 각 작품의 설계 배경과 문제 해결 과정은 프로젝트 상세 페이지에 정리되어 있습니다.</p>
+          <a class="link link-hover inline-block" href="/projects/">상세 기록 보러 가기 →</a>
         </div>
       )}
     </section>
@@ -125,17 +126,8 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
     <!-- 연락 영역 -->
     <section id="contact" aria-labelledby="contact-heading" class="space-y-6">
       <h2 id="contact-heading" class="text-3xl font-bold">연락</h2>
-      <div class="space-y-3">
-        <p>{profile.location}</p>
-        <a class="link link-hover inline-block break-all" href={`mailto:${profile.email}`}>
-          {profile.email}
-        </a>
-      </div>
-      <div class="flex flex-wrap gap-6 pt-2">
-        <a class="link link-hover" href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        <a class="link link-hover" href={profile.solvedAc} target="_blank" rel="noopener noreferrer">solved.ac ↗</a>
-        <a class="link link-hover" href={profile.leetcode} target="_blank" rel="noopener noreferrer">LeetCode ↗</a>
-      </div>
+      <p class="opacity-70">{profile.location}</p>
+      <ProfileLinks includeEmail />
     </section>
   </div>
 </BaseLayout>

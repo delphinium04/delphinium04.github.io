@@ -7,39 +7,39 @@ const skillCategories = [...new Set(usedSkills.map((skill) => skill.category))];
 const learningSkills = skills.filter((skill) => skill.category === "학습 중" || skill.name === "C++");
 ---
 
-<BaseLayout title="역량 | 이유찬 포트폴리오" description="게임플레이와 상태 설계, 공통 시스템과 UI, 모듈 통합 및 협업 경험과 현재 학습 중인 기술을 소개합니다." sideBarActiveItemID="services">
-  <div class="mb-5">
-    <h1 class="text-3xl w-full font-bold">역량</h1>
+<BaseLayout title="역량 | 이유찬 포트폴리오" description="캐릭터 상태 제어, 확장 가능한 시스템과 UI, 모듈 통합 및 협업 경험과 현재 다지고 있는 기본기를 소개합니다." sideBarActiveItemID="services">
+  <div class="mb-4">
+    <h1 class="text-3xl w-full font-bold">역량과 기술</h1>
   </div>
-  <p class="mb-10 leading-relaxed">{profile.description}</p>
+  <p class="mb-12 text-lg leading-relaxed text-base-content/85">프로젝트에서 직접 부딪치며 익힌 설계 방식과 기술 스택, 그리고 현재 채워 나가고 있는 컴퓨터 공학 기본기를 소개합니다.</p>
 
-  <h2 class="text-3xl w-full font-bold mb-5">핵심 역량</h2>
-  <div class="mb-10">
+  <h2 class="text-3xl w-full font-bold mb-6">핵심 역량</h2>
+  <div class="mb-14">
     {strengths.map((strength, index) => (
       <>
         <article class="rounded-lg bg-base-100">
-          <div class="hero-content items-start justify-start p-4">
+          <div class="hero-content items-start justify-start py-5 px-4">
             <div class="grow w-full">
-              <h3 class="text-xl font-bold">{strength.title}</h3>
-              <p class="py-2 leading-relaxed">{strength.description}</p>
+              <h3 class="text-xl font-bold leading-snug">{strength.title}</h3>
+              <p class="mt-2.5 leading-relaxed text-base-content/85">{strength.description}</p>
             </div>
           </div>
         </article>
-        {index < strengths.length - 1 && <div class="divider my-0"></div>}
+        {index < strengths.length - 1 && <div class="divider my-1"></div>}
       </>
     ))}
   </div>
 
-  <h2 class="text-3xl w-full font-bold mb-5">기술 활용 경험</h2>
-  <div class="grid md:grid-cols-2 gap-4 mb-10">
+  <h2 class="text-3xl w-full font-bold mb-6">기술 활용 경험</h2>
+  <div class="grid md:grid-cols-2 gap-5 mb-14">
     {skillCategories.map((category) => (
-      <article class="rounded-lg bg-base-100 border border-base-200 p-5">
-        <h3 class="text-xl font-bold mb-4">{category}</h3>
-        <ul class="grid gap-4">
+      <article class="rounded-lg bg-base-100 border border-base-200 p-6">
+        <h3 class="text-xl font-bold mb-5">{category}</h3>
+        <ul class="grid gap-5">
           {usedSkills.filter((skill) => skill.category === category).map((skill) => (
             <li>
-              <h4 class="font-semibold mb-1">{skill.name}</h4>
-              <p class="text-sm leading-relaxed">{skill.description}</p>
+              <h4 class="font-semibold mb-1.5">{skill.name}</h4>
+              <p class="text-sm leading-relaxed text-base-content/85">{skill.description}</p>
             </li>
           ))}
         </ul>
@@ -47,33 +47,33 @@ const learningSkills = skills.filter((skill) => skill.category === "학습 중" 
     ))}
   </div>
 
-  <h2 class="text-3xl w-full font-bold mb-5">현재 학습</h2>
-  <div class="grid gap-4 mb-5">
+  <h2 class="text-3xl w-full font-bold mb-6">현재 학습</h2>
+  <div class="grid gap-4 mb-6">
     {learningSkills.map((skill) => (
-      <article class="rounded-lg bg-base-100 border border-base-200 p-5">
-        <h3 class="text-xl font-bold mb-2">{skill.name}</h3>
-        <p class="leading-relaxed">{skill.description}</p>
+      <article class="rounded-lg bg-base-100 border border-base-200 p-6">
+        <h3 class="text-xl font-bold mb-2.5">{skill.name}</h3>
+        <p class="leading-relaxed text-base-content/85">{skill.description}</p>
       </article>
     ))}
   </div>
-  <div class="flex flex-wrap gap-3 mb-10">
+  <div class="flex flex-wrap gap-3 mb-14">
     <a class="btn btn-outline btn-sm" href={profile.solvedAc} target="_blank" rel="noopener noreferrer">solved.ac</a>
     <a class="btn btn-outline btn-sm" href={profile.leetcode} target="_blank" rel="noopener noreferrer">LeetCode</a>
   </div>
 
-  <h2 class="text-3xl w-full font-bold mb-5">개발자로서 중요하게 생각하는 것</h2>
-  <div class="grid gap-5">
+  <h2 class="text-3xl w-full font-bold mb-6">개발자로서 중요하게 생각하는 것</h2>
+  <div class="grid gap-7">
     <article>
-      <h3 class="text-xl font-bold mb-2">플레이어가 즐길 수 있는 결과물</h3>
-      <p class="leading-relaxed">사람들이 즐기는 문화 콘텐츠를 만드는 일에 기여하고 싶습니다. 대학 프로젝트를 PlayX4에 선보이며, 기획 의도와 복잡한 규칙을 안정적으로 구현하는 일이 실제 플레이 경험으로 이어지는 보람을 느꼈습니다.</p>
+      <h3 class="text-xl font-bold mb-2.5">화면 너머의 플레이어를 의식하는 개발</h3>
+      <p class="leading-relaxed text-base-content/85">코드가 의도대로 동작하는 데서 그치지 않고, 플레이어가 조작할 때 느끼는 반응성과 안내의 명확함까지 살피려 합니다. 대학 졸업 작품을 PlayX4 현장에서 선보이며, 처음 접하는 관람객들이 막힘없이 게임을 즐기는 모습을 보았을 때 가장 큰 보람을 느꼈습니다.</p>
     </article>
     <article>
-      <h3 class="text-xl font-bold mb-2">함께 원인을 이해하는 문제 해결</h3>
-      <p class="leading-relaxed">팀원이 막혔을 때 입력 흐름과 컴포넌트의 역할을 함께 정리하고, 브레이크포인트로 기대한 동작과 달라지는 지점을 확인합니다. 동료가 자신의 코드 구조를 이해하고 직접 해결할 수 있도록 돕습니다.</p>
+      <h3 class="text-xl font-bold mb-2.5">동료가 스스로 해결할 수 있게 돕는 협업</h3>
+      <p class="leading-relaxed text-base-content/85">팀원이 문제로 막혔을 때 결과만 대신 고쳐주기보다, 데이터가 어디서부터 어긋났는지 함께 따라가며 원인을 밝히는 과정을 선호합니다. 서로가 코드의 맥락을 이해해야 이후 기능 수정이나 확장도 흔들림 없이 이어갈 수 있다고 믿습니다.</p>
     </article>
     <article>
-      <h3 class="text-xl font-bold mb-2">꾸준히 다지는 기본기</h3>
-      <p class="leading-relaxed">현재는 C++로 자료구조와 알고리즘을 직접 구현하고 문제를 풀며 기본기를 다지고 있습니다. 그래픽 렌더링 과정과 운영체제도 함께 학습하고 있습니다.</p>
+      <h3 class="text-xl font-bold mb-2.5">도구에 안주하지 않는 기초 체력</h3>
+      <p class="leading-relaxed text-base-content/85">엔진과 라이브러리가 제공하는 편리한 기능 뒤에서 실제로 어떤 연산과 메모리 처리가 일어나는지 궁금해합니다. 당장 눈앞의 기능 제작에만 머물지 않고, 컴퓨터 공학 기초를 꾸준히 다져 문제의 본질을 볼 줄 아는 개발자로 성장하고 싶습니다.</p>
     </article>
   </div>
 </BaseLayout>

@@ -1,3 +1,58 @@
-.time-line-container>div:last-child .education__time>.education__line {
-    display: none;
+html,
+body {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  line-height: 1.8;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+p,
+li,
+dd {
+  line-height: 1.85;
+}
+
+.prose {
+  line-height: 1.9;
+  word-break: keep-all;
+}
+
+.prose :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 1.45em;
+  margin-bottom: 1.45em;
+  line-height: 1.9;
+}
+
+.prose :where(ul, ol):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.45em;
+}
+
+.prose :where(li):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 0.65em;
+  margin-bottom: 0.65em;
+  line-height: 1.85;
+}
+
+.prose :where(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 2.3em;
+  margin-bottom: 0.95em;
+  line-height: 1.35;
+}
+
+.prose :where(h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 1.85em;
+  margin-bottom: 0.75em;
+  line-height: 1.4;
+}
+
+.prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  line-height: 1.65;
+}
+
+.time-line-container > div:last-child .education__time > .education__line {
+  display: none;
 }

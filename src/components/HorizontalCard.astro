@@ -23,7 +23,7 @@ const tag_url = url.split("/").slice(0, -1).join("/") + "/tag";
       }
       {!img && icon && <div class="w-full md:w-[13rem] shrink-0 aspect-video rounded-lg bg-base-200 flex items-center justify-center text-5xl" aria-hidden="true">{icon}</div>}
       <div class="grow w-full space-y-2">
-        <h3 class="text-xl font-bold">
+        <h3 class="text-xl font-bold leading-snug">
           {title}
           {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
         </h3>

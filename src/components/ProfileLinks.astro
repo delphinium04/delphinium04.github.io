@@ -1,0 +1,51 @@
+---
+import { profile } from "../data/profile";
+
+const { includeEmail = false } = Astro.props;
+const links = [
+  ...(includeEmail ? [{ label: "이메일", detail: profile.email, href: `mailto:${profile.email}`, icon: "email" }] : []),
+  { label: "GitHub", detail: "코드와 프로젝트", href: profile.github, icon: "github" },
+  { label: "solved.ac", detail: "알고리즘 문제 해결", href: profile.solvedAc, icon: "solved" },
+  { label: "LeetCode", detail: "코딩 문제 풀이", href: profile.leetcode, icon: "leetcode" },
+];
+---
+
+<div class="profile-links">
+  {links.map((link) => (
+    <a class="profile-link" href={link.href}
+      target={link.icon === "email" ? undefined : "_blank"}
+      rel={link.icon === "email" ? undefined : "noopener noreferrer"}>
+      <span class:list={["profile-link-icon", link.icon]}>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
+          {link.icon === "github" ? (
+            <path fill="currentColor" d="M12 .75a11.25 11.25 0 0 0-3.56 21.92c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.73.39-1.22.71-1.5-2.5-.28-5.13-1.25-5.13-5.56 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.43.11-2.98 0 0 .95-.3 3.1 1.15a10.8 10.8 0 0 1 5.63 0c2.15-1.46 3.1-1.15 3.1-1.15.61 1.55.23 2.7.11 2.98.72.79 1.16 1.8 1.16 3.02 0 4.32-2.63 5.28-5.14 5.56.4.35.76 1.03.76 2.08v3.1c0 .3.2.65.78.54A11.25 11.25 0 0 0 12 .75Z" />
+          ) : link.icon === "email" ? (
+            <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="m4 7 8 6 8-6" /></g>
+          ) : link.icon === "solved" ? (
+            <path d="m5 11 5 5L20 6M5 21h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          ) : (
+            <g stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 3-9 9a4 4 0 0 0 0 6l3 3a4 4 0 0 0 6 0l2-2M6 12l3-3a4 4 0 0 1 6 0l2 2" /><path d="M11 15h10" /></g>
+          )}
+        </svg>
+      </span>
+      <span class="profile-link-copy"><span class="profile-link-title">{link.label}</span><span class="profile-link-detail">{link.detail}</span></span>
+      <svg class="profile-link-arrow" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" /></svg>
+      {link.icon !== "email" && <span class="sr-only">(새 탭에서 열기)</span>}
+    </a>
+  ))}
+</div>
+
+<style>
+  .profile-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 0.75rem; }
+  .profile-link { display: flex; align-items: center; gap: 0.875rem; padding: 1rem; border: 1px solid oklch(var(--bc) / 0.14); border-radius: 1rem; background: oklch(var(--b1)); transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease; }
+  .profile-link:hover { border-color: oklch(var(--bc) / 0.4); background: oklch(var(--b2)); box-shadow: 0 4px 14px oklch(var(--bc) / 0.06); }
+  .profile-link:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+  .profile-link-icon { display: grid; place-items: center; flex-shrink: 0; width: 2.75rem; height: 2.75rem; border-radius: 0.8rem; background: oklch(var(--b2)); }
+  .solved { color: #168448; background: #eaf8ef; }
+  .leetcode { color: #996000; background: #fff4db; }
+  .profile-link-copy { display: grid; gap: 0.2rem; min-width: 0; }
+  .profile-link-title { font-weight: 700; }
+  .profile-link-detail { font-size: 0.75rem; opacity: 0.7; overflow-wrap: anywhere; }
+  .profile-link-arrow { flex-shrink: 0; margin-left: auto; opacity: 0.5; }
+  @media (prefers-reduced-motion: reduce) { .profile-link { transition: none; } }
+</style>
