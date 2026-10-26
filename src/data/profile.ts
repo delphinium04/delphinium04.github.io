@@ -9,7 +9,6 @@ export const profile = {
     "주로 Unity와 C#으로 캐릭터 조작, 전투·스킬, UI 시스템을 다뤄 왔습니다. 문제가 생기면 동작 순서를 차근차근 짚어가며 원인을 찾고, 동료와 호흡을 맞춰 끝까지 결과물을 완성하는 일을 중요하게 생각합니다.",
   email: "flashedmite45@gmail.com",
   github: "https://github.com/delphinium04",
-  notion: "https://www.notion.so/62d20568b61a83e0a2bf01d3fff20dc6",
   solvedAc: "https://solved.ac/profile/delphinium04",
   leetcode: "https://leetcode.com/u/delphinium04/",
   location: "대한민국 서울특별시 중랑구",
