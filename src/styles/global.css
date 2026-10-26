@@ -1,3 +1,9 @@
+:root,
+html {
+  color-scheme: light only;
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   font-family:
@@ -38,6 +44,24 @@ pre code,
     Monaco,
     Consolas,
     monospace;
+}
+
+/* 백틱(`) 인라인 코드 강조 (Notion 스타일 배지) */
+:not(pre) > code,
+.prose :where(:not(pre) > code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: rgba(135, 131, 120, 0.15);
+  color: #d44c47;
+  padding: 0.18em 0.42em;
+  margin: 0 0.08em;
+  border-radius: 0.35rem;
+  font-size: 0.875em;
+  font-weight: 500;
+  vertical-align: baseline;
+}
+
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+  content: none;
 }
 
 p,

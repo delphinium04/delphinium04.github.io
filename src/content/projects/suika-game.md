@@ -4,7 +4,7 @@ description: 'Pygame과 Pymunk를 활용해 물리 충돌 기반의 공 합성 �
 period: '2023.10.01 ~ 2023.11.20 (약 1달)'
 team: '4인 팀 프로젝트 (상명대학교 알고리즘과게임콘텐츠)'
 role: '조장 · 프로그래밍 (게임 루프 설계·공 합성 조건 판별·모듈 데이터 연결)'
-stack: ['Python', 'Pygame', 'Pymunk', 'Windows']
+stack: ['Python', 'Pygame', 'Pymunk']
 order: 4
 heroImage: '/portfolio/suika.webp'
 imageWidth: 1024

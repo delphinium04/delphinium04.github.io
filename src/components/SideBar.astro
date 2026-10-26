@@ -1,20 +1,32 @@
 ---
 import SideBarMenu from "./SideBarMenu.astro";
-const { sideBarActiveItemID } = Astro.props;
+const { sideBarActiveItemID, tocHeadings, backHref } = Astro.props;
+const isProjectToc = Array.isArray(tocHeadings) && tocHeadings.length > 0;
 ---
 
 <aside
-  class="hidden lg:block fixed right-5 xl:right-8 top-24 z-30 w-36 xl:w-40 rounded-xl border border-base-200 bg-base-100/90 backdrop-blur shadow-md p-2 text-base-content"
+  class:list={[
+    "hidden lg:block fixed right-5 xl:right-8 top-24 z-30 rounded-xl border border-base-200 bg-base-100/90 backdrop-blur shadow-md p-2 text-base-content max-h-[calc(100vh-7rem)] overflow-y-auto",
+    isProjectToc ? "w-52 xl:w-60" : "w-36 xl:w-44",
+  ]}
   aria-label="주 메뉴"
 >
   <div class="px-3 py-1.5 text-xs font-semibold opacity-50 select-none">목차</div>
-  <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+  <SideBarMenu
+    sideBarActiveItemID={sideBarActiveItemID}
+    tocHeadings={tocHeadings}
+    backHref={backHref}
+  />
 </aside>
 
 <div class="drawer-side z-40 lg:hidden">
   <label for="my-drawer" class="drawer-overlay" aria-label="메뉴 닫기"></label>
-  <aside class="px-3 pt-6 h-auto min-h-full w-56 bg-base-100 text-base-content flex flex-col border-r border-base-200" aria-label="모바일 메뉴">
+  <aside class="px-3 pt-6 h-auto min-h-full w-64 bg-base-100 text-base-content flex flex-col border-r border-base-200 overflow-y-auto" aria-label="모바일 메뉴">
     <div class="px-3 pb-2 text-xs font-semibold opacity-50 select-none">목차</div>
-    <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+    <SideBarMenu
+      sideBarActiveItemID={sideBarActiveItemID}
+      tocHeadings={tocHeadings}
+      backHref={backHref}
+    />
   </aside>
 </div>

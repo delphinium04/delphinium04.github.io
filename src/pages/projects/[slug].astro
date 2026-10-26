@@ -8,12 +8,21 @@ export async function getStaticPaths() {
   return (await getCollection("projects")).map((project) => ({ params: { slug: project.slug }, props: { project } }));
 }
 const { project } = Astro.props;
-const { Content } = await project.render();
+const { Content, headings } = await project.render();
+const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 const { title, description, period, team, role, stack, heroImage, imageWidth, imageHeight, badge, links, videos } = project.data;
 ---
 
-<BaseLayout title={`${title} | 이유찬`} description={description} image={heroImage} sideBarActiveItemID="projects" ogType="article">
-  <a class="link link-hover text-sm" href="/projects/">← 전체 프로젝트</a>
+<BaseLayout
+  title={`${title} | 이유찬`}
+  description={description}
+  image={heroImage}
+  sideBarActiveItemID="projects"
+  tocHeadings={tocHeadings}
+  backHref="/#projects"
+  ogType="article"
+>
+  <a class="link link-hover text-sm" href="/#projects">← 홈으로 돌아가기</a>
   <article class="mt-6 w-full">
     <header>
       <div class="flex flex-wrap items-center gap-3">
@@ -69,6 +78,6 @@ const { title, description, period, team, role, stack, heroImage, imageWidth, im
       <Content />
     </div>
     <div class="divider mt-12"></div>
-    <a class="btn btn-outline" href="/projects/">다른 프로젝트 보기</a>
+    <a class="btn btn-outline" href="/#projects">홈으로 돌아가기</a>
   </article>
 </BaseLayout>

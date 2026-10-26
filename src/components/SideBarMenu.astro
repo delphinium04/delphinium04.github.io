@@ -1,34 +1,106 @@
 ---
 import { profile } from "../data/profile";
-const { sideBarActiveItemID } = Astro.props;
-const items = [
-  { id: "home", label: "홈", href: "/" },
-  { id: "projects", label: "프로젝트", href: "/projects/" },
-  { id: "services", label: "역량과 기술", href: "/services/" },
-  { id: "blog", label: "기술 기록", href: "/blog/" },
-  { id: "cv", label: "이력", href: "/cv/" },
+const { sideBarActiveItemID, tocHeadings, backHref = "/" } = Astro.props;
+const isProjectToc = Array.isArray(tocHeadings) && tocHeadings.length > 0;
+
+const homeItems = [
+  { id: "home", label: "홈", href: "/#home" },
+  { id: "projects", label: "주요 프로젝트", href: "/#projects" },
+  { id: "services", label: "역량과 기술", href: "/#services" },
+  { id: "cv", label: "이력", href: "/#cv" },
+  { id: "blog", label: "기술 기록", href: "/#blog" },
+  { id: "contact", label: "연락", href: "/#contact" },
 ];
 ---
 
-<ul class="menu menu-sm p-0 gap-1">
-  {items.map((item) => (
+{isProjectToc ? (
+  <ul class="menu menu-sm p-0 gap-1" data-toc-menu>
     <li>
-      <a
-        class:list={[
-          "py-1.5 px-3 text-sm rounded-lg",
-          { "bg-base-200 font-semibold": sideBarActiveItemID === item.id },
-        ]}
-        id={item.id}
-        href={item.href}
-        aria-current={sideBarActiveItemID === item.id ? "page" : undefined}
-      >
-        {item.label}
+      <a class="py-1.5 px-3 text-sm font-semibold rounded-lg" href={backHref}>
+        ← 돌아가기
       </a>
     </li>
-  ))}
-  <li>
-    <a class="py-1.5 px-3 text-sm rounded-lg" href={`mailto:${profile.email}`}>
-      연락하기
-    </a>
-  </li>
-</ul>
+    <li class="my-1 border-t border-base-200"></li>
+    {tocHeadings.map((heading) => (
+      <li>
+        <a
+          class:list={[
+            "py-1.5 px-3 rounded-lg leading-snug",
+            heading.depth === 3 ? "pl-5 text-xs opacity-80" : "text-sm",
+          ]}
+          data-toc-link={heading.slug}
+          href={`#${heading.slug}`}
+        >
+          {heading.text}
+        </a>
+      </li>
+    ))}
+  </ul>
+) : (
+  <ul class="menu menu-sm p-0 gap-1" data-toc-menu>
+    {homeItems.map((item) => (
+      <li>
+        <a
+          class:list={[
+            "py-1.5 px-3 text-sm rounded-lg",
+            { "bg-base-200 font-semibold": sideBarActiveItemID === item.id },
+          ]}
+          data-toc-link={item.id}
+          href={item.href}
+        >
+          {item.label}
+        </a>
+      </li>
+    ))}
+    <li>
+      <a class="py-1.5 px-3 text-sm rounded-lg" href={`mailto:${profile.email}`}>
+        연락하기
+      </a>
+    </li>
+  </ul>
+)}
+
+<script>
+  function initTocScrollSpy() {
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]"));
+    if (links.length === 0) return;
+
+    const ids = [...new Set(links.map((l) => l.dataset.tocLink).filter(Boolean))] as string[];
+    const targets = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (targets.length === 0) return;
+
+    const setActive = (activeId: string) => {
+      links.forEach((link) => {
+        const isMatch = link.dataset.tocLink === activeId;
+        link.classList.toggle("bg-base-200", isMatch);
+        link.classList.toggle("font-semibold", isMatch);
+      });
+    };
+
+    const onScroll = () => {
+      const offset = 140;
+      let currentId = targets[0].id;
+      for (const el of targets) {
+        if (el.getBoundingClientRect().top <= offset) {
+          currentId = el.id;
+        }
+      }
+      setActive(currentId);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    links.forEach((link) => {
+      link.addEventListener("click", () => {
+        const drawer = document.getElementById("my-drawer") as HTMLInputElement | null;
+        if (drawer && drawer.checked) drawer.checked = false;
+      });
+    });
+  }
+
+  initTocScrollSpy();
+  document.addEventListener("astro:page-load", initTocScrollSpy);
+</script>

@@ -2,13 +2,18 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 import ProfileLinks from "../components/ProfileLinks.astro";
+import TimeLineElement from "../components/cv/TimeLine.astro";
 import { getCollection } from "astro:content";
-import { profile, strengths } from "../data/profile";
+import { profile, strengths, skills } from "../data/profile";
 import { projectIcons } from "../data/project-icons";
 import createSlug from "../lib/createSlug";
 
 const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
 const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
+
+const usedSkills = skills.filter((skill) => skill.category !== "학습 중" && skill.name !== "C++");
+const skillCategories = [...new Set(usedSkills.map((skill) => skill.category))];
+const learningSkills = skills.filter((skill) => skill.category === "학습 중" || skill.name === "C++");
 ---
 
 <BaseLayout sideBarActiveItemID="home">
@@ -23,8 +28,7 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
 
   <div class="space-y-24 pb-16">
     <!-- 상단 프로필 및 소개 영역 -->
-    <section class="space-y-10">
-      <!-- 2. 프로필 이미지 + 오른쪽에 첫 제목 및 부제목 -->
+    <section id="home" class="space-y-10 scroll-mt-16">
       <div class="flex flex-col sm:flex-row sm:items-center gap-6 md:gap-8">
         <div class="w-28 md:w-32 shrink-0 rounded-2xl overflow-hidden bg-base-200 border border-base-300 shadow-sm">
           <img
@@ -44,7 +48,6 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
         </div>
       </div>
 
-      <!-- 3. 소개 본문 텍스트 영역 -->
       <div class="space-y-4 text-lg leading-relaxed pt-2">
         <p class="font-semibold">{profile.tagline}</p>
         <p class="text-base-content/85">{profile.description}</p>
@@ -55,10 +58,9 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
     </section>
 
     <!-- 주요 프로젝트 영역 -->
-    <section aria-labelledby="projects-heading" class="space-y-8">
-      <div class="flex flex-wrap items-baseline justify-between gap-3">
+    <section id="projects" aria-labelledby="projects-heading" class="space-y-8 scroll-mt-16">
+      <div>
         <h2 id="projects-heading" class="text-3xl font-bold">주요 프로젝트 {"</>"}</h2>
-        <a class="link link-hover text-sm" href="/projects/">전체 프로젝트 →</a>
       </div>
       <div class="space-y-4">
         {projects.map((project, index) => (
@@ -73,6 +75,7 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
               url={`/projects/${project.slug}/`}
               target="_self"
               badge={project.data.badge}
+              tags={project.data.stack}
             />
             {index < projects.length - 1 && <div class="divider my-2"></div>}
           </>
@@ -80,24 +83,121 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
       </div>
     </section>
 
-    <!-- 개발에서 집중하는 것 영역 -->
-    <section aria-labelledby="strengths-heading" class="space-y-8">
-      <h2 id="strengths-heading" class="text-3xl font-bold">개발에서 집중하는 것</h2>
-      <div class="grid gap-8 md:grid-cols-2">
-        {strengths.slice(0, 4).map((strength) => (
-          <div class="space-y-2">
-            <h3 class="font-bold text-lg leading-snug">{strength.title}</h3>
-            <p class="leading-relaxed text-base-content/85">{strength.description}</p>
-          </div>
-        ))}
+    <!-- 역량과 기술 영역 -->
+    <section id="services" aria-labelledby="services-heading" class="space-y-12 scroll-mt-16">
+      <div class="space-y-8">
+        <h2 id="services-heading" class="text-3xl font-bold">역량과 기술</h2>
+        <div class="grid gap-8 md:grid-cols-2">
+          {strengths.map((strength) => (
+            <div class="space-y-2">
+              <h3 class="font-bold text-lg leading-snug">{strength.title}</h3>
+              <p class="leading-relaxed text-base-content/85">{strength.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
-      <div class="pt-2">
-        <a class="link link-hover text-sm" href="/services/">역량과 기술 자세히 보기 →</a>
+
+      <div class="space-y-6">
+        <h3 class="text-2xl font-bold">기술 활용 경험</h3>
+        <div class="grid md:grid-cols-2 gap-5">
+          {skillCategories.map((category) => (
+            <article class="rounded-lg bg-base-100 border border-base-200 p-6">
+              <h4 class="text-xl font-bold mb-5">{category}</h4>
+              <ul class="grid gap-5">
+                {usedSkills.filter((skill) => skill.category === category).map((skill) => (
+                  <li>
+                    <div class="font-semibold mb-1.5">{skill.name}</div>
+                    <p class="text-sm leading-relaxed text-base-content/85">{skill.description}</p>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <h3 class="text-2xl font-bold">현재 학습</h3>
+        <div class="grid gap-4">
+          {learningSkills.map((skill) => (
+            <article class="rounded-lg bg-base-100 border border-base-200 p-6">
+              <h4 class="text-xl font-bold mb-2.5">{skill.name}</h4>
+              <p class="leading-relaxed text-base-content/85">{skill.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <h3 class="text-2xl font-bold">개발자로서 중요하게 생각하는 것</h3>
+        <div class="grid gap-7">
+          <article>
+            <h4 class="text-lg font-bold mb-2">화면 너머의 플레이어를 의식하는 개발</h4>
+            <p class="leading-relaxed text-base-content/85">코드가 의도대로 동작하는 데서 그치지 않고, 플레이어가 조작할 때 느끼는 반응성과 안내의 명확함까지 살피려 합니다. 대학 졸업 작품을 PlayX4 현장에서 선보이며, 처음 접하는 관람객들이 막힘없이 게임을 즐기는 모습을 보았을 때 가장 큰 보람을 느꼈습니다.</p>
+          </article>
+          <article>
+            <h4 class="text-lg font-bold mb-2">동료가 스스로 해결할 수 있게 돕는 협업</h4>
+            <p class="leading-relaxed text-base-content/85">팀원이 문제로 막혔을 때 결과만 대신 고쳐주기보다, 데이터가 어디서부터 어긋났는지 함께 따라가며 원인을 밝히는 과정을 선호합니다. 서로가 코드의 맥락을 이해해야 이후 기능 수정이나 확장도 흔들림 없이 이어갈 수 있다고 믿습니다.</p>
+          </article>
+          <article>
+            <h4 class="text-lg font-bold mb-2">도구에 안주하지 않는 기초 체력</h4>
+            <p class="leading-relaxed text-base-content/85">엔진과 라이브러리가 제공하는 편리한 기능 뒤에서 실제로 어떤 연산과 메모리 처리가 일어나는지 궁금해합니다. 당장 눈앞의 기능 제작에만 머물지 않고, 컴퓨터 공학 기초를 꾸준히 다져 문제의 본질을 볼 줄 아는 개발자로 성장하고 싶습니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 이력 영역 -->
+    <section id="cv" aria-labelledby="cv-heading" class="space-y-10 scroll-mt-16">
+      <h2 id="cv-heading" class="text-3xl font-bold">이력</h2>
+
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold">학력</h3>
+        <div class="time-line-container grid">
+          <TimeLineElement title="상명대학교 서울캠퍼스 게임전공" subtitle="2023.03 ~ 2027.02">
+            4년제 학사 졸업예정 · 한일문화콘텐츠전공 부전공
+          </TimeLineElement>
+          <TimeLineElement title="세명컴퓨터고등학교 게임콘텐츠과" subtitle="2021.09 ~ 2023.02" />
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold">교육 및 대외활동</h3>
+        <div class="time-line-container grid">
+          <TimeLineElement title="XR 기술을 활용한 게임 개발자 부트캠프 4회차" subtitle="2025.12 ~ 2026.04 · 주식회사 디벨로켓에듀(前 경일게임IT아카데미)">
+            실무형 실습과 13인 협업 프로젝트, 포트폴리오 제작을 진행했으며 이후 취업 준비 방향을 재정비하며 중도 종료했습니다.
+          </TimeLineElement>
+          <TimeLineElement title="청년 일경험 지원사업" subtitle="2025년 · (사)한국능률협회 · 주식회사 행복한 다람쥐단">
+            3인 팀으로 진행한 Unity 3D 편의점 시뮬레이션 프로젝트에서 방문 손님의 단계별 행동 AI를 FSM으로 작성했습니다.
+          </TimeLineElement>
+          <TimeLineElement title="2022 비버 게임잼" subtitle="2022.12">
+            짧은 호흡의 팀 개발에 도전하며, 제한된 시간 안에 의도한 로직을 완성하기 위한 자료구조·알고리즘 기초의 중요성을 체감했습니다.
+          </TimeLineElement>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold">자격 및 어학</h3>
+        <div class="time-line-container grid">
+          <TimeLineElement title="JLPT N5 합격" subtitle="2022.01" />
+          <TimeLineElement title="ITQ 한글엑셀(한셀) A등급" subtitle="2016.03 · 한국생산성본부" />
+          <TimeLineElement title="ITQ 아래한글 A등급" subtitle="2015.10 · 한국생산성본부" />
+          <TimeLineElement title="ITQ 한글파워포인트(한쇼) A등급" subtitle="2014.10 · 한국생산성본부" />
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold">기타 이력</h3>
+        <div class="time-line-container grid">
+          <TimeLineElement title="GS25 매장 근무" subtitle="총 2년 이상">
+            중계센트럴점·S상봉역점·사가정아이파크점 등에서 근무하며 매장 운영과 고객 응대를 맡았습니다.
+          </TimeLineElement>
+        </div>
       </div>
     </section>
 
     <!-- 최근 기술 기록 영역 -->
-    <section aria-labelledby="blog-heading" class="space-y-8">
+    <section id="blog" aria-labelledby="blog-heading" class="space-y-8 scroll-mt-16">
       <h2 id="blog-heading" class="text-3xl font-bold">최근 기술 기록</h2>
       {posts.length > 0 ? (
         <div class="space-y-4">
@@ -116,15 +216,14 @@ const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDat
           ))}
         </div>
       ) : (
-        <div class="bg-base-200 border-l-4 border-secondary p-6 rounded-r-lg space-y-3 leading-relaxed">
-          <p>기술 기록을 준비하고 있습니다. 각 작품의 설계 배경과 문제 해결 과정은 프로젝트 상세 페이지에 정리되어 있습니다.</p>
-          <a class="link link-hover inline-block" href="/projects/">상세 기록 보러 가기 →</a>
+        <div class="bg-base-200 border-l-4 border-secondary p-6 rounded-r-lg leading-relaxed">
+          <p>기술 기록을 준비하고 있습니다. 각 작품의 설계 배경과 문제 해결 과정은 상단 주요 프로젝트 상세 페이지에 정리되어 있습니다.</p>
         </div>
       )}
     </section>
 
     <!-- 연락 영역 -->
-    <section id="contact" aria-labelledby="contact-heading" class="space-y-6">
+    <section id="contact" aria-labelledby="contact-heading" class="space-y-6 scroll-mt-16">
       <h2 id="contact-heading" class="text-3xl font-bold">연락</h2>
       <p class="opacity-70">{profile.location}</p>
       <ProfileLinks includeEmail />

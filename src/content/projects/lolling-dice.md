@@ -4,7 +4,7 @@ description: '주사위 눈금에 따라 달라지는 12종의 스킬과 플레�
 period: '2026.04.01 ~ 2026.04.20 (2주 개발 · 1주 QA)'
 team: '13인 팀 프로젝트 (기획 8명 · 프로그래밍 5명)'
 role: '프로그래밍 / 캐릭터 전반 구현 (플레이어 입력·FSM·스킬·HUD·Scene 전환·튜토리얼)'
-stack: ['Unity 6000.3.9f1', 'C#', 'New Input System', 'Addressables', 'Shader Graph', 'Windows / itch.io']
+stack: ['Unity', 'C#', 'New Input System', 'Addressables', 'Shader Graph']
 order: 1
 heroImage: '/portfolio/lolling-dice.webp'
 imageWidth: 1024

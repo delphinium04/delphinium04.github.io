@@ -4,7 +4,7 @@ description: 'System V 공유 메모리 갱신과 SDL2 렌더링이 맞물리는
 period: '2024년 2학기 (기말 프로젝트)'
 team: '2인 플레이 지원 대학 수업 팀 프로젝트 (게임서버프로그래밍입문)'
 role: '공유 메모리·렌더링 갱신 루프 제안 및 구동 검증 지원'
-stack: ['C', 'Linux / WSLg', 'SDL2', 'SDL2_image', 'SDL2_ttf', 'CMake', 'System V 공유 메모리', 'POSIX 시그널', 'fork · 파이프']
+stack: ['C', 'Linux', 'SDL2', 'System V 공유 메모리', 'POSIX 시그널']
 order: 5
 heroImage: '/portfolio/shared-memory-game.webp'
 imageWidth: 1024
