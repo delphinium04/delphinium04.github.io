@@ -228,6 +228,8 @@ public async UniTask<PopupBase> Show(string address)
 
 ### 최종 결과
 
+![PlayX4 2026 상명대학교 게임전공 부스 HolyDay 전시 및 시연 현장](/portfolio/holyday-playx4.jpg)
+
 - 2026년 1월부터 5월까지 플레이 가능한 멀티플레이 빌드를 완성하여 **PlayX4 상명대학교 게임전공 부스에서 현장 전시 및 시연**을 진행했습니다.
 - 2026년 9월부터 Steam 정식 출시를 위한 보수 작업에 돌입했으며, 전반적인 게임 UI 개편 및 애니메이션 수정 작업을 이어가고 있습니다.
 
