@@ -37,6 +37,7 @@ const projectCollection = defineCollection({
         period: z.string(),
         team: z.string(),
         role: z.string(),
+        roleLabel: z.string().default('담당 역할'),
         stack: z.array(z.string()),
         order: z.number(),
         heroImage: z.string().optional(),

@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content, headings } = await project.render();
 const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
-const { title, description, period, team, role, stack, heroImage, imageWidth, imageHeight, badge, steamAppId, links, videos } = project.data;
+const { title, description, period, team, role, roleLabel, stack, heroImage, imageWidth, imageHeight, badge, steamAppId, links, videos } = project.data;
 // 커버 이미지: 원본 너비 유지, 세로는 최대 400px (초과 시 중앙 크롭)
 const COVER_MAX_HEIGHT = 400;
 const coverWidth = imageWidth ?? 1024;
@@ -46,7 +46,7 @@ const coverHeight = Math.min(imageHeight ?? COVER_MAX_HEIGHT, COVER_MAX_HEIGHT);
       <dl class="grid gap-5 sm:grid-cols-2 bg-base-200 rounded-lg p-6 my-7">
         <div><dt class="text-sm opacity-70">개발 기간</dt><dd class="mt-1.5 leading-relaxed">{period}</dd></div>
         <div><dt class="text-sm opacity-70">팀 구성</dt><dd class="mt-1.5 leading-relaxed">{team}</dd></div>
-        <div class="sm:col-span-2"><dt class="text-sm opacity-70">담당 역할</dt><dd class="mt-1.5 leading-relaxed">{role}</dd></div>
+        <div class="sm:col-span-2"><dt class="text-sm opacity-70">{roleLabel}</dt><dd class="mt-1.5 leading-relaxed">{role}</dd></div>
       </dl>
       <div class="flex flex-wrap gap-2 mb-6">{stack.map((tech) => <span class="badge badge-outline">{tech}</span>)}</div>
       {links.length > 0 && <div class="flex flex-wrap gap-3 mb-8">{links.map((link) => (
