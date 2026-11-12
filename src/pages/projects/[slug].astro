@@ -10,6 +10,10 @@ const { project } = Astro.props;
 const { Content, headings } = await project.render();
 const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
 const { title, description, period, team, role, stack, heroImage, imageWidth, imageHeight, badge, steamAppId, links, videos } = project.data;
+// 커버 이미지: 원본 너비 유지, 세로는 최대 400px (초과 시 중앙 크롭)
+const COVER_MAX_HEIGHT = 400;
+const coverWidth = imageWidth ?? 1024;
+const coverHeight = Math.min(imageHeight ?? COVER_MAX_HEIGHT, COVER_MAX_HEIGHT);
 ---
 
 <BaseLayout
@@ -21,8 +25,15 @@ const { title, description, period, team, role, stack, heroImage, imageWidth, im
   backHref="/#projects"
   ogType="article"
 >
-  {heroImage && <div slot="cover" class="w-full flex justify-center bg-base-200 border-b border-base-300">
-    <img src={heroImage} alt={`${title} 커버 이미지`} width={imageWidth} height={imageHeight} class="block max-w-full h-auto" />
+  {heroImage && <div slot="cover" class="project-cover w-full flex justify-center bg-base-200 border-b border-base-300">
+    <img
+      src={heroImage}
+      alt={`${title} 커버 이미지`}
+      width={coverWidth}
+      height={coverHeight}
+      style={`width:${coverWidth}px;aspect-ratio:${coverWidth}/${coverHeight}`}
+      class="block max-w-full h-auto object-cover object-center"
+    />
   </div>}
   <a class="link link-hover text-sm" href="/#projects">← 홈으로 돌아가기</a>
   <article class="mt-6 w-full">
@@ -93,3 +104,48 @@ const { title, description, period, team, role, stack, heroImage, imageWidth, im
     <a class="btn btn-outline" href="/#projects">홈으로 돌아가기</a>
   </article>
 </BaseLayout>
+
+<script>
+  // 커버 이미지 좌우 여백을 이미지의 맨 왼쪽 / 맨 오른쪽 열 평균 색으로 채움
+  function edgeColor(img: HTMLImageElement, x: number, top: number, height: number) {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    if (!ctx) return null;
+    ctx.drawImage(img, x, top, 1, height, 0, 0, 1, height);
+    const data = ctx.getImageData(0, 0, 1, height).data;
+    let r = 0, g = 0, b = 0;
+    for (let i = 0; i < data.length; i += 4) {
+      r += data[i];
+      g += data[i + 1];
+      b += data[i + 2];
+    }
+    return `rgb(${Math.round(r / height)}, ${Math.round(g / height)}, ${Math.round(b / height)})`;
+  }
+
+  function paintCover(img: HTMLImageElement) {
+    const cover = img.parentElement;
+    const { naturalWidth: w, naturalHeight: h } = img;
+    if (!cover || !w || !h) return;
+    // 화면에 보이는(중앙 크롭된) 세로 구간만 샘플링
+    const visibleHeight = Math.min(h, Math.round((w * img.height) / img.width) || h);
+    const top = Math.floor((h - visibleHeight) / 2);
+    try {
+      const left = edgeColor(img, 0, top, visibleHeight);
+      const right = edgeColor(img, w - 1, top, visibleHeight);
+      if (left && right) cover.style.background = `linear-gradient(to right, ${left} 50%, ${right} 50%)`;
+    } catch {
+      // 캔버스 읽기 실패 시 기본 배경 유지
+    }
+  }
+
+  function initCover() {
+    const img = document.querySelector<HTMLImageElement>(".project-cover img");
+    if (!img) return;
+    if (img.complete) paintCover(img);
+    else img.addEventListener("load", () => paintCover(img), { once: true });
+  }
+
+  document.addEventListener("astro:page-load", initCover);
+</script>

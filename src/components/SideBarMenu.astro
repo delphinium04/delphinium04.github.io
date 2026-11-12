@@ -1,5 +1,4 @@
 ---
-import { profile } from "../data/profile";
 const { sideBarActiveItemID, tocHeadings, backHref = "/" } = Astro.props;
 const isProjectToc = Array.isArray(tocHeadings) && tocHeadings.length > 0;
 
@@ -8,8 +7,7 @@ const homeItems = [
   { id: "projects", label: "주요 프로젝트", href: "/#projects" },
   { id: "services", label: "역량과 기술", href: "/#services" },
   { id: "cv", label: "이력", href: "/#cv" },
-  { id: "blog", label: "기술 기록", href: "/#blog" },
-  { id: "contact", label: "연락", href: "/#contact" },
+  { id: "contact", label: "링크", href: "/#contact" },
 ];
 ---
 
@@ -52,11 +50,6 @@ const homeItems = [
         </a>
       </li>
     ))}
-    <li>
-      <a class="py-1.5 px-3 text-sm rounded-lg" href={`mailto:${profile.email}`}>
-        연락하기
-      </a>
-    </li>
   </ul>
 )}
 

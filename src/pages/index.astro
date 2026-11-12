@@ -6,10 +6,8 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
 import { getCollection } from "astro:content";
 import { profile, strengths, skills } from "../data/profile";
 import { projectIcons } from "../data/project-icons";
-import createSlug from "../lib/createSlug";
 
 const projects = (await getCollection("projects")).sort((a, b) => a.data.order - b.data.order);
-const posts = ((await getCollection("blog")) ?? []).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
 
 const usedSkills = skills.filter((skill) => skill.category !== "학습 중" && skill.name !== "C++");
 const skillCategories = [...new Set(usedSkills.map((skill) => skill.category))];
@@ -196,35 +194,9 @@ const learningSkills = skills.filter((skill) => skill.category === "학습 중" 
       </div>
     </section>
 
-    <!-- 최근 기술 기록 영역 -->
-    <section id="blog" aria-labelledby="blog-heading" class="space-y-8 scroll-mt-16">
-      <h2 id="blog-heading" class="text-3xl font-bold">최근 기술 기록</h2>
-      {posts.length > 0 ? (
-        <div class="space-y-4">
-          {posts.map((post, index) => (
-            <>
-              <HorizontalCard
-                title={post.data.title}
-                img={post.data.heroImage}
-                desc={post.data.description}
-                url={`/blog/${createSlug(post.data.title, post.slug)}/`}
-                target="_self"
-                badge={post.data.badge}
-              />
-              {index < posts.length - 1 && <div class="divider my-2"></div>}
-            </>
-          ))}
-        </div>
-      ) : (
-        <div class="bg-base-200 border-l-4 border-secondary p-6 rounded-r-lg leading-relaxed">
-          <p>기술 기록을 준비하고 있습니다. 각 작품의 설계 배경과 문제 해결 과정은 상단 주요 프로젝트 상세 페이지에 정리되어 있습니다.</p>
-        </div>
-      )}
-    </section>
-
-    <!-- 연락 영역 -->
+    <!-- 링크 영역 -->
     <section id="contact" aria-labelledby="contact-heading" class="space-y-6 scroll-mt-16">
-      <h2 id="contact-heading" class="text-3xl font-bold">연락</h2>
+      <h2 id="contact-heading" class="text-3xl font-bold">링크</h2>
       <p class="opacity-70">{profile.location}</p>
       <ProfileLinks includeEmail />
     </section>
