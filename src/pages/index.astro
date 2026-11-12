@@ -121,6 +121,11 @@ const learningSkills = skills.filter((skill) => skill.category === "학습 중" 
             <article class="rounded-lg bg-base-100 border border-base-200 p-6">
               <h4 class="text-xl font-bold mb-2.5">{skill.name}</h4>
               <p class="leading-relaxed text-base-content/85">{skill.description}</p>
+              {skill.name === "C++" && (
+                <div class="mt-5">
+                  <ProfileLinks items={["solved", "leetcode"]} />
+                </div>
+              )}
             </article>
           ))}
         </div>
@@ -198,7 +203,7 @@ const learningSkills = skills.filter((skill) => skill.category === "학습 중" 
     <section id="contact" aria-labelledby="contact-heading" class="space-y-6 scroll-mt-16">
       <h2 id="contact-heading" class="text-3xl font-bold">링크</h2>
       <p class="opacity-70">{profile.location}</p>
-      <ProfileLinks includeEmail />
+      <ProfileLinks items={["email", "github"]} />
     </section>
   </div>
 </BaseLayout>

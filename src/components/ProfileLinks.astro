@@ -1,13 +1,16 @@
 ---
 import { profile } from "../data/profile";
 
-const { includeEmail = false } = Astro.props;
-const links = [
-  ...(includeEmail ? [{ label: "이메일", detail: profile.email, href: `mailto:${profile.email}`, icon: "email" }] : []),
+const { includeEmail = false, items } = Astro.props;
+const allLinks = [
+  { label: "이메일", detail: profile.email, href: `mailto:${profile.email}`, icon: "email" },
   { label: "GitHub", detail: "코드와 프로젝트", href: profile.github, icon: "github" },
   { label: "solved.ac", detail: "알고리즘 문제 해결", href: profile.solvedAc, icon: "solved" },
   { label: "LeetCode", detail: "코딩 문제 풀이", href: profile.leetcode, icon: "leetcode" },
 ];
+const links = Array.isArray(items)
+  ? items.map((key) => allLinks.find((link) => link.icon === key)).filter(Boolean)
+  : allLinks.filter((link) => includeEmail || link.icon !== "email");
 ---
 
 <div class="profile-links">

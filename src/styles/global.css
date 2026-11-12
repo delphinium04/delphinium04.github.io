@@ -122,3 +122,74 @@ mark,
 .time-line-container > div:last-child .education__time > .education__line {
   display: none;
 }
+
+@page {
+  size: A4;
+  margin: 14mm 14mm 15mm 14mm;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html {
+    font-size: 13.5px;
+  }
+
+  body,
+  .drawer,
+  .drawer-content {
+    background: #ffffff !important;
+  }
+
+  main {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .project-cover {
+    margin-bottom: 1.25rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .project-cover img {
+    max-height: 240px;
+    width: auto !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  pre,
+  blockquote,
+  figure,
+  dl,
+  tr,
+  img {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  .prose pre {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-x: visible !important;
+    font-size: 0.82em;
+  }
+}
