@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content, headings } = await project.render();
 const tocHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
-const { title, description, period, team, role, stack, heroImage, imageWidth, imageHeight, badge, links, videos } = project.data;
+const { title, description, period, team, role, stack, heroImage, imageWidth, imageHeight, badge, steamAppId, links, videos } = project.data;
 ---
 
 <BaseLayout
@@ -41,6 +41,17 @@ const { title, description, period, team, role, stack, heroImage, imageWidth, im
       ))}</div>}
       {heroImage && <Image src={heroImage} alt={`${title} 게임 화면`} width={imageWidth ?? 750} height={imageHeight ?? 422} class="w-full h-auto object-contain rounded-lg mb-8" />}
     </header>
+    {steamAppId && <section class="mb-10" aria-labelledby="project-steam-heading">
+      <h2 id="project-steam-heading" class="text-2xl font-bold mb-4">Steam 상점 페이지</h2>
+      <div class="flex justify-center">
+        <iframe
+          class="w-full max-w-[646px] h-[190px] border-0 rounded-lg"
+          src={`https://store.steampowered.com/widget/${steamAppId}/`}
+          title={`${title} Steam 상점 위젯`}
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>}
     {videos.length > 0 && <section class="mb-10" aria-labelledby="project-videos-heading">
       <h2 id="project-videos-heading" class="text-2xl font-bold mb-4">플레이 영상</h2>
       <div class="grid gap-6">

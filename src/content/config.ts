@@ -43,6 +43,7 @@ const projectCollection = defineCollection({
         imageWidth: z.number().int().positive().optional(),
         imageHeight: z.number().int().positive().optional(),
         badge: z.string().optional(),
+        steamAppId: z.string().regex(/^\d+$/).optional(),
         links: z.array(z.object({ label: z.string(), url: z.string().url() })).default([]),
         videos: z.array(z.discriminatedUnion('type', [
             z.object({

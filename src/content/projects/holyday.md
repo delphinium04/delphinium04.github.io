@@ -1,23 +1,19 @@
 ---
 title: 'HolyDay'
 description: '데이터와 효과를 분리한 11종의 축복과 스택형 팝업 관리자를 설계하고, 프로파일러 기반 리팩터링과 Git 병합을 맡았습니다.'
-period: '2026.01 ~ 진행 중 (2026.05 PlayX4 전시 · Steam 출시 준비)'
+period: '2026.01 ~ 2026.11 (2026.05 PlayX4 전시 · 2026.11.09 Steam 출시)'
 team: '4인 팀 프로젝트'
 role: '프로그래밍(UI / Scene) 및 Git 관리 (축복 시스템·팝업 관리·UI·초기화 및 매니저 구조)'
 stack: ['Unity', 'C#', 'Photon Fusion', 'UniTask', 'UGUI']
 order: 2
 heroImage: '/portfolio/holyday.webp'
-imageWidth: 460
-imageHeight: 215
-badge: 'PlayX4 2026 시연'
-videos:
-  - type: 'youtube'
-    id: 'mF_PZJ_SnCo'
-    title: 'HolyDay 소개 영상'
-    unavailableReason: '업로더 설정에 의해 외부 페이지 임베드 재생이 제한되어 있습니다. 아래 링크를 통해 YouTube에서 바로 시청하실 수 있습니다.'
+imageWidth: 1730
+imageHeight: 890
+badge: 'PlayX4 2026 시연 · Steam 출시'
+steamAppId: '5013770'
 links:
-  - label: '소개 영상 (YouTube)'
-    url: 'https://youtu.be/mF_PZJ_SnCo'
+  - label: 'Steam 상점 페이지'
+    url: 'https://store.steampowered.com/app/5013770'
 ---
 
 > 다른 이를 저지하고 석상을 점령하여 당신의 신앙심을 증명하여라
@@ -26,7 +22,7 @@ links:
 
 ### 게임 소개
 
-**HolyDay**는 상대 팀을 저지하며 전장의 석상을 점령해 더 많은 신성력(점수)을 획득하는 **4인 멀티플레이 MOBA(AOS) 게임**입니다. 2026년 5월 PlayX4 전시에서 상명대학교 게임전공 부스로 출품해 현장 유저 테스트를 거쳤으며, 현재 Steam 정식 출시를 목표로 UI/UX 개편 및 아키텍처 보수 작업을 진행하고 있습니다.
+**HolyDay**는 상대 팀을 저지하며 전장의 석상을 점령해 더 많은 신성력(점수)을 획득하는 **4인 멀티플레이 MOBA(AOS) 게임**입니다. 2026년 5월 PlayX4 전시에서 상명대학교 게임전공 부스로 출품해 현장 유저 테스트를 거쳤으며, 2026년 11월 9일 Steam에 정식 출시했습니다.
 
 ### 개발 목표와 조건
 
@@ -231,7 +227,7 @@ public async UniTask<PopupBase> Show(string address)
 ![PlayX4 2026 상명대학교 게임전공 부스 HolyDay 전시 및 시연 현장](/portfolio/holyday-playx4.jpg)
 
 - 2026년 1월부터 5월까지 플레이 가능한 멀티플레이 빌드를 완성하여 **PlayX4 상명대학교 게임전공 부스에서 현장 전시 및 시연**을 진행했습니다.
-- 2026년 9월부터 Steam 정식 출시를 위한 보수 작업에 돌입했으며, 전반적인 게임 UI 개편 및 애니메이션 수정 작업을 이어가고 있습니다.
+- **2026년 11월 9일 Steam에 정식 출시**했습니다.
 
 ### 배운 점
 
