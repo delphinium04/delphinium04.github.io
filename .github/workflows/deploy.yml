@@ -20,7 +20,7 @@ jobs:
       - name: Build Astro site
         uses: withastro/action@v5
         with:
-          package-manager: pnpm@8.15.9
+          package-manager: pnpm@10
 
   deploy:
     needs: build
