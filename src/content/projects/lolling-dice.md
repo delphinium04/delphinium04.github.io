@@ -37,24 +37,18 @@ links:
 
 | 구성원 | 담당 영역 | 구체적인 작업 |
 | --- | --- | --- |
-| **본인** | 프로그래밍 / 캐릭터 전반 | 플레이어 입력과 FSM, HUD, 12종 스킬, 데이터 연동 툴, Scene 전환 및 튜토리얼 |
-| **기획팀 (8명)** | 게임 및 스킬 기획 | 전투 규칙과 12종 스킬 기획, 스킬 수치 데이터 설정, 이펙트 지정 |
-| **프로그래밍팀 (4명)** | 인게임 콘텐츠 프로그래밍 | 상점, 보스, 일반 몬스터, 절차적 맵 생성 등 |
+| **기획팀 (8명)** | 게임 및 스킬 기획 | 전투 규칙과 12종 스킬 기획, 스킬 수치 데이터 설정, 이펙트 지정, 테스트 |
+| <mark>**[delphinium04(본인)](https://github.com/delphinium04)**</mark> | 플레이어·스킬·성장·HUD·튜토리얼 | • **플레이어 조작 및 FSM**: 입력 핸들러, 6개 상태 머신, 넉백·피격 연출<br>• **스킬 시스템**: 투사체·히트박스 추상화, 주사위 눈금별 스킬 효과 및 12종 스킬 구현<br>• **데이터 및 성장**: Google Sheets 데이터 연동 툴, 레벨업·스탯·장비 장착, 씬 전환 시 데이터 유지<br>• **UI 및 연출**: 플레이어 HUD, 재장전 주사위 연출, 씬 전환 효과 및 튜토리얼 |
+| [4awolll](https://github.com/4awolll) | 프로젝트 관리·상점·강화·장비·시스템 | • **프로젝트 관리**: 초기 환경 세팅, PR 리뷰 및 브랜치 병합<br>• **캐릭터 스탯·장비 강화 시스템**: 주사위 결과에 따른 캐릭터 스탯 강화 시스템 및 강화 UI 연출<br>• **상점 및 장비**: 상점 구매·페이백 로직, 스킬 상점 진열, 무기 스왑 및 인벤토리 연동<br>• **시스템 및 UI**: 게임 데이터 관리, 아이템·스킬 툴팁, 다국어 지원, 엔딩 UI |
+| [Blind-ness-777](https://github.com/Blind-ness-777) | 절차적 맵 생성·스테이지·연출 | • **절차적 맵 생성**: 그래프 기반 방·복도 생성 알고리즘, 문 배치 및 방 클리어 전투 연동<br>• **스테이지 구성**: 로비·튜토리얼·스테이지 1~3·보스방 타일맵 제작 및 Y-Sorting 적용<br>• **월드 기능 및 연출**: 미니맵, 보상 상자·포탈 상호작용 UI, 카메라·컷신·BGM 연결 |
+| [ZERO26120](https://github.com/ZERO26120) | 일반 몬스터·보스 AI 및 스폰 | • **일반 몬스터**: 몬스터 FSM, 프리팹 구성 및 기본 공격·스킬 로직<br>• **보스 전투**: 스테이지·최종 보스 전용 스킬 패턴 및 이펙트 연결<br>• **스폰 및 보상**: 방 내부 몬스터·보스 스폰, 처치 시 경험치·골드 드랍 연동 |
+| [rannings](https://github.com/rannings) | 타이틀·옵션 UI | • **타이틀 씬**: 타이틀 UI 배치, 게임 시작·옵션 이동·종료 기능<br>• **옵션 씬**: 볼륨 조절 스크롤바, 언어 선택 UI 및 전환 로직 |
 
 ### 개발 조건과 환경
 
 - 기획 8명, 개발팀 5명으로 진행한 13인 협업 프로젝트
-- 기획팀이 작성한 전투 규칙과 12종의 스킬 명세를 바탕으로 시스템 구축
-- 2주간의 기능 개발 이후 1주간의 QA 기간 동안 GitHub Issue를 통해 버그 리포트와 수정 이력을 추적하며 완성도 향상
-
-### 내가 맡은 핵심 기능
-
-- **플레이어 입력 처리** (`New Input System` 기반 이벤트 변환)
-- **캐릭터 FSM 설계 및 구현** (6개 상태 분리 및 생명주기 제어)
-- **플레이어 스킬 및 전투 시스템** (주사위 눈금 반영 구조 및 12종 스킬 제작)
-- **Google Sheets 기반 데이터 반영 자동화 에디터 툴**
-- **레벨업 / 스탯 / 장비 및 Scene 간 데이터 영속성**
-- **이벤트 기반 HUD와 Scene 전환 연출·튜토리얼**
+- 기획팀이 초기 작성한 전투 규칙, 12종의 스킬 명세를 바탕으로 기획과 프로그래밍이 동시에 진행
+- 2주간의 개발 이후 1주간의 QA 기간 동안 GitHub Issue를 통해 버그 수정을 하도록 일정이 고정됨
 
 ---
 
@@ -156,6 +150,12 @@ public void Tick(float currentTime)
 - 생성 직후 이미 겹쳐 있는 대상을 놓치지 않도록 첫 프레임 판정은 `Collider2D.Overlap`으로 즉시 검증하고, 이후 지속·이동 판정은 `Trigger2D` 이벤트로 처리하여 판정 누락 방지
 - `IDamageable` 인터페이스를 통한 몬스터 구현체와의 결합도 분리
 - **키워드**: `ScriptableObject` · `Inheritance` · `Physics2D` · `Coroutine`
+
+#### 관련 전체 소스 코드
+
+<div class="not-prose flex flex-wrap gap-3 my-4">
+  <a class="btn btn-outline btn-sm" href="https://github.com/Kyungil-smart/08-firstcollabproject-Nahyunsusu/tree/main/Project_LoL/Assets/_Scripts/LYC/Skill" target="_blank" rel="noopener noreferrer">스킬 시스템 소스 코드 (Skill) ↗</a>
+</div>
 
 ---
 
@@ -308,6 +308,13 @@ public class MoveState : BaseState
 - 상태 종료 시 속도·코루틴·무적·입력 제한을 정리하는 뒷정리 과정 일원화
 - **키워드**: `State Pattern` · `SRP` · `New Input System` · `C# Event` · `Coroutine`
 
+#### 관련 전체 소스 코드
+
+<div class="not-prose flex flex-wrap gap-3 my-4">
+  <a class="btn btn-outline btn-sm" href="https://github.com/Kyungil-smart/08-firstcollabproject-Nahyunsusu/tree/main/Project_LoL/Assets/_Scripts/LYC/States" target="_blank" rel="noopener noreferrer">플레이어 캐릭터 State 소스 코드 (States) ↗</a>
+  <a class="btn btn-outline btn-sm" href="https://github.com/Kyungil-smart/08-firstcollabproject-Nahyunsusu/tree/main/Project_LoL/Assets/_Scripts/LYC/Player" target="_blank" rel="noopener noreferrer">플레이어 관련 소스 코드 (Player) ↗</a>
+</div>
+
 ---
 
 ### 3-3. Google Sheets 기반 데이터 반영 자동화
@@ -357,6 +364,12 @@ AssetDatabase.SaveAssets();
 - 밸런스 패치 때마다 반복되던 Inspector 수작업 제거 및 데이터 반영 시간 단축
 - **키워드**: `EditorWindow` · `Addressables` · `SerializedObject` · `AssetDatabase`
 
+#### 관련 전체 소스 코드
+
+<div class="not-prose flex flex-wrap gap-3 my-4">
+  <a class="btn btn-outline btn-sm" href="https://github.com/Kyungil-smart/08-firstcollabproject-Nahyunsusu/tree/main/Project_LoL/Assets/_Scripts/LYC/Utils" target="_blank" rel="noopener noreferrer">데이터 연동 툴 소스 코드 (Utils) ↗</a>
+</div>
+
 ---
 
 ### 3-4. 플레이어 성장 데이터 영속성 및 이벤트 기반 HUD
@@ -370,6 +383,76 @@ AssetDatabase.SaveAssets();
 - **싱글톤 기반 데이터 영속성**: 플레이어 데이터를 전담 관리하는 매니저를 두어 Scene 전환 시에도 스탯, 스킬, 장비 정보를 보존하고, 새 Scene 로드 완료 시 플레이어 객체가 이를 복원하도록 구성
 - **기본 스탯과 런타임 스탯 분리**: 캐릭터의 원본 기본 스탯과 레벨업·장비 장착으로 변동되는 보정값을 분리하여, 장비 교체 시 스탯이 중복 가산되거나 오차가 발생하지 않도록 재계산 로직 작성
 - **이벤트 기반(Event-Driven) HUD 갱신**: 체력 변동, 경험치·골드 획득, 스킬 사용 및 주사위 재장전 시점에만 C# 이벤트를 발행하여 HUD가 갱신되도록 결합도 감소
+
+#### 핵심 코드: 씬 전환 시 플레이어 데이터 영속성 (`PlayerPersistentData.cs`)
+
+```csharp
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// 씬 전환 사이에 플레이어 스탯과 장비를 유지하는 싱글톤입니다.
+/// 첫 씬에 배치하면 DontDestroyOnLoad로 게임 종료 전까지 유지됩니다.
+/// 새 게임 시작 시 Clear()를 호출하면 저장 데이터가 초기화됩니다.
+/// </summary>
+public class PlayerPersistentData : MonoBehaviour
+{
+	public static PlayerPersistentData Instance { get; private set; }
+
+	public bool HasData { get; private set; }
+
+	/// <summary>PlayerDataSO 기반 초기 순수 스탯 (레벨업·장비 보너스 미적용)</summary>
+	public PlayerData SavedBaseData { get; private set; }
+
+	/// <summary>레벨업 선택지로 누적된 퍼센트 보너스 (UI 표시 및 재계산용)</summary>
+	public StatBonusPercent SavedLevelUpBonusPercent { get; private set; } = new StatBonusPercent();
+
+	/// <summary>현재 HP/레벨/경험치/골드 및 장비 보정 후 스탯</summary>
+	public PlayerData SavedRuntimeData { get; private set; }
+
+	/// <summary>플레이어 스킬 데이터 저장</summary>
+	public List<SkillDataSO> SavedSkills { get; private set; } = new();
+
+	/// <summary>장착 중인 장비 목록</summary>
+	public List<EquipmentData> SavedEquipments { get; private set; } = new();
+
+	private void Awake()
+	{
+		if (Instance != null && Instance != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
+		Instance = this;
+		DontDestroyOnLoad(gameObject);
+	}
+
+	/// <summary>씬 전환 전 PlayerController와 EquipmentList가 호출</summary>
+	public void Save(PlayerData baseData, PlayerData runtimeData, StatBonusPercent levelUpBonus,
+	                 List<EquipmentData> equips, List<SkillDataSO> skills)
+	{
+		Debug.Log("데이터 저장 실행");
+		SavedBaseData            = baseData?.Clone();
+		SavedRuntimeData         = runtimeData?.Clone();
+		SavedLevelUpBonusPercent = levelUpBonus?.Clone() ?? new StatBonusPercent();
+		SavedEquipments          = equips != null ? new List<EquipmentData>(equips) : new List<EquipmentData>();
+		SavedSkills              = skills != null ? new List<SkillDataSO>(skills) : new List<SkillDataSO>();
+		HasData                  = true;
+	}
+
+	/// <summary>새 게임을 시작할 때 호출</summary>
+	public void Clear()
+	{
+		HasData                  = false;
+		SavedBaseData            = null;
+		SavedRuntimeData         = null;
+		SavedLevelUpBonusPercent = new StatBonusPercent();
+		SavedEquipments          = new List<EquipmentData>();
+		SavedSkills              = new List<SkillDataSO>();
+	}
+}
+```
 
 ---
 

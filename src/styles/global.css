@@ -110,6 +110,15 @@ dd {
   line-height: 1.65;
 }
 
+/* 형광펜(mark) 강조 효과 */
+mark,
+.prose :where(mark):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: rgba(255, 212, 0, 0.35);
+  color: inherit;
+  padding: 0.12em 0.35em;
+  border-radius: 0.25rem;
+}
+
 .time-line-container > div:last-child .education__time > .education__line {
   display: none;
 }
