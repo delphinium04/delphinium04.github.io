@@ -7,6 +7,7 @@ const allLinks = [
   { label: "GitHub", detail: "코드와 프로젝트", href: profile.github, icon: "github" },
   { label: "solved.ac", detail: "알고리즘 문제 해결", href: profile.solvedAc, icon: "solved" },
   { label: "LeetCode", detail: "코딩 문제 풀이", href: profile.leetcode, icon: "leetcode" },
+  { label: "Notion", detail: "C++ 기본기(구현) 학습 기록", href: profile.cppNotion, icon: "notion" },
 ];
 const links = Array.isArray(items)
   ? items.map((key) => allLinks.find((link) => link.icon === key)).filter(Boolean)
@@ -26,6 +27,8 @@ const links = Array.isArray(items)
             <g stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3" /><path d="m4 7 8 6 8-6" /></g>
           ) : link.icon === "solved" ? (
             <path d="m5 11 5 5L20 6M5 21h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+          ) : link.icon === "notion" ? (
+            <g stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3" /><path d="M9 16V8l6 8V8" /></g>
           ) : (
             <g stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m15 3-9 9a4 4 0 0 0 0 6l3 3a4 4 0 0 0 6 0l2-2M6 12l3-3a4 4 0 0 1 6 0l2 2" /><path d="M11 15h10" /></g>
           )}
@@ -46,6 +49,7 @@ const links = Array.isArray(items)
   .profile-link-icon { display: grid; place-items: center; flex-shrink: 0; width: 2.75rem; height: 2.75rem; border-radius: 0.8rem; background: oklch(var(--b2)); }
   .solved { color: #168448; background: #eaf8ef; }
   .leetcode { color: #996000; background: #fff4db; }
+  .notion { color: #2f3437; background: #f1f1ef; }
   .profile-link-copy { display: grid; gap: 0.2rem; min-width: 0; }
   .profile-link-title { font-weight: 700; }
   .profile-link-detail { font-size: 0.75rem; opacity: 0.7; overflow-wrap: anywhere; }

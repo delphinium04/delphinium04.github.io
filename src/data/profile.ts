@@ -11,6 +11,7 @@ export const profile = {
   github: "https://github.com/delphinium04",
   solvedAc: "https://solved.ac/profile/delphinium04",
   leetcode: "https://leetcode.com/u/delphinium04/",
+  cppNotion: "https://app.notion.com/p/C-40f20568b61a801b9b7cd8dc8a83cf7e?source=copy_link",
   location: "대한민국 서울특별시 중랑구",
 };
 
