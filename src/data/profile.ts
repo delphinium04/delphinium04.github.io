@@ -3,7 +3,7 @@ export const profile = {
   englishName: "Lee Yuchan",
   coverImage: "/portfolio/cover.jpg",
   photo: "/portfolio/profile.jpg",
-  role: "게임 클라이언트 신입 개발자",
+  role: "신입 개발자",
   tagline: "기획 의도를 명확한 코드로 풀어내고, 플레이어가 자연스럽게 몰입할 수 있는 완결된 게임을 만듭니다.",
   description:
     "주로 Unity와 C#으로 캐릭터 조작, 전투·스킬, UI 시스템을 다뤄 왔습니다. 문제가 생기면 동작 순서를 차근차근 짚어가며 원인을 찾고, 동료와 호흡을 맞춰 끝까지 결과물을 완성하는 일을 중요하게 생각합니다.",
